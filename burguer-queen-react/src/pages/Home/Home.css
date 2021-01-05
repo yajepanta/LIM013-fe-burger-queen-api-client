@@ -1,0 +1,32 @@
+.home-view{
+    display: grid;
+    grid-template-columns: 400px; 
+    column-gap: 10px;
+}
+
+.products{
+    grid-column: 1;
+}
+
+.order{
+    grid-column: 2;
+}
+
+.order-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-info{
+    background-color: #90BE6D;
+}
+
+/* .order-info > label {
+    color: #FFFFFF;
+} */
+
+.send-order{
+    color: #FFFFFF;
+    background-color: #EE3124;
+    border: none;
+}

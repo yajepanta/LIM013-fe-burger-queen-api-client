@@ -1,0 +1,7 @@
+nav{
+    background-color: #EE3124;
+}
+
+nav > img {
+    height: 100px;
+}

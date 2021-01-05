@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import '../Login/Login.css';
 import logo from '../../assets/images/logo.svg';
-import Label from './components/Label/Label';
-import Input from './components/Input/Input';
+import Label from '../../commons/Input/Label/Label';
+import Input from '../../commons/Input/Input';
+import Cookies from 'universal-cookie';
 
 const Login = () => {
     const [ email, setUser ] = useState('');
@@ -45,18 +46,36 @@ const Login = () => {
             }
         } */
     };
-
     
     const handleSubmit = () => {
-        let account = { email, password };
-        if (regEx.test(email)) {
-            console.log(account);
-        } else {
-            console.log(email);
-        }
+        const account = {
+            email: email,
+            password: password
+          }
+          const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(account)
+            
+          };
+           console.log(account);
+            const cookies = new Cookies();
+            fetch('http://localhost:5000/auth', options)
+                .then((res)=>{ 
+                    if (res.status === 200) {
+                        return res.json();
+                    }})
+                .then(res=>{
+                    console.log(res.token);
+                    cookies.set('cookieSession', res.token, { path: '/' });
+                    console.log('cookies de sesion:', cookies.get('cookieSession'));
+                })
+                .catch(err=>console.log(err));
+        
     }
     
-   
     return (
         <div className='login-view'>
             <div className='login-container'>
@@ -100,7 +119,7 @@ const Login = () => {
                         param={passwordError}
                     />
                 }           
-               <button className='login-button' onClick={ handleSubmit }> Ingresar </button>
+               <button className='login-button' onClick={ handleSubmit } type="submit"> Ingresar </button>
 
             </div>
         </div>
