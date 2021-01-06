@@ -7,6 +7,7 @@ const Nav = () => {
         <div>
             <nav>
                 <img src={logo} alt="logo"></img>
+                <span>Cerrar sesión</span>
             </nav>
         </div>
     );

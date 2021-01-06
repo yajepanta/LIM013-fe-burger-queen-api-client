@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-.App {
-  font-family: 'Roboto', sans-serif;
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  
+  .App {
+    font-family: 'Roboto', sans-serif;
+  }
 }
+
 /* .App {
   text-align: center;
 }

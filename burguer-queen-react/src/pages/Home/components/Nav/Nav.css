@@ -1,7 +1,20 @@
 nav{
     background-color: #EE3124;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 nav > img {
-    height: 100px;
+    height: 40px;
+    padding: 2vh;
+    
+}
+
+nav > span {
+    color: #ffffff;
+    font-size: larger;
+    font-weight: bolder;
+    padding-right: 2vw;
 }

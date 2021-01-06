@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../Login/Login.css';
 import logo from '../../assets/images/logo.svg';
-import Label from '../../commons/Input/Label/Label';
-import Input from '../../commons/Input/Input';
+import Label from './components/Label/Label';
+import Input from './components/Input/Input';
 import Cookies from 'universal-cookie';
 
 const Login = () => {
@@ -73,7 +73,7 @@ const Login = () => {
                     console.log('cookies de sesion:', cookies.get('cookieSession'));
                 })
                 .catch(err=>console.log(err));
-        
+                window.location.href= './home';
     }
     
     return (

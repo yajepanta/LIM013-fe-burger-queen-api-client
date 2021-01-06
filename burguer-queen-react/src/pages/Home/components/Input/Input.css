@@ -1,0 +1,22 @@
+input {
+    width: 300px;
+    height: 40px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: none;
+}
+
+input::placeholder {
+    color: grey;
+    text-align: center;
+    /* vertical-align: auto; */
+}
+
+.input-error {
+    border: 1px solid rgb(240, 101, 101);
+    color: rgb(240, 101, 101);
+}
+
+.input-error::placeholder {
+    color: rgb(240, 101, 101);
+}
