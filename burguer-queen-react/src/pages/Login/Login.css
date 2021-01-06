@@ -1,0 +1,51 @@
+.login-view {
+    background-image: url('../../assets/images/login-bg.png');
+    width: 900px;
+    height: 600px;
+    backdrop-filter: blur(100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 700px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.46);
+    border-radius: 50px;
+    padding: 30px 0 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.login-container img {
+    width: 348px;
+    height: 80px;
+}
+
+.login-button {
+    width: 300px;
+    height: 60px;
+    background: #5E9732;
+    border: none;
+    border-radius: 50px;
+    
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 47px;
+    color: #FFFFFF;
+}
+
+.login-button:hover {
+    background: #4e8028;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    width: 550px;
+    justify-content: space-between;
+}

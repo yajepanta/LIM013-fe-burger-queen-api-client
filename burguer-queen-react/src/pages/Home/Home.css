@@ -1,0 +1,36 @@
+.home-view{
+    display: grid;
+    grid-template-columns: 40vw; 
+    column-gap: 10vw;
+    padding: 20px 50px 0 50px;
+}
+
+.products{
+    grid-column: 1;
+}
+
+.order{
+    grid-column: 2;
+    border-radius: 50px;
+}
+
+.order-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-info{
+    background-color: #90BE6D;
+}
+
+/* .order-info > label {
+    color: #FFFFFF;
+} */
+
+.send-order{
+    color: #FFFFFF;
+    background-color: #EE3124;
+    border: none;
+    width: 40vw;
+    height: 40px;
+}

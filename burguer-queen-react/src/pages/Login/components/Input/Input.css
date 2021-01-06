@@ -1,0 +1,26 @@
+input {
+    width: 350px;
+    height: 60px;
+    left: 564px;
+    top: 422px;
+    background: #FFFFFF;
+    border-radius: 50px;
+    border: none;
+}
+
+input::placeholder {
+    font-size: 30px;
+    line-height: 47px;
+    color: grey;
+    text-align: center;
+    vertical-align: auto;
+}
+
+.input-error {
+    border: 1px solid rgb(240, 101, 101);
+    color: rgb(240, 101, 101);
+}
+
+.input-error::placeholder {
+    color: rgb(240, 101, 101);
+}
