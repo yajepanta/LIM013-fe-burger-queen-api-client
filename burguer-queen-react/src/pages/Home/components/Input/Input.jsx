@@ -1,7 +1,7 @@
 import React from 'react';
 import './Input.css';
 
-const Input = ({ attribute, /* handleChange,  */param}) => {
+const Input = ({ attribute, handleInput }) => {
     return (
         
             <input
@@ -9,9 +9,9 @@ const Input = ({ attribute, /* handleChange,  */param}) => {
                 name={attribute.name}
                 placeholder={attribute.placeholder}
                 type={attribute.type}
-               /*  onChange={ (e) => handleChange(e.target.name, e.target.value)} */
-                className={ param ? 'input-error' : ''}> 
-            </input>
+                onChange={ (e) => handleInput(e.target.name, e.target.value)}
+               
+            ></input>
         
     );
 };

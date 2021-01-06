@@ -14,6 +14,9 @@ const Home = () => {
     const [productData, setProductData] = useState([]);
     /* order debería ser un array de objetos con datos de producto (más qty) */
     const [order, setOrder] = useState([]);
+    const [client, setClient] = useState();
+    const [numberTable, setNumberTable] = useState();
+    const [waiter, setWaiter] = useState();
 
     console.log('lista de productos únicos', order)
 
@@ -36,9 +39,38 @@ const Home = () => {
                 qty: null,
             }]
         }; */
+    
     const sendOrder = () => {
         return console.log('orden enviada');
     };
+
+    const handleInput = (name, value) => {
+        switch (name){
+            case 'waiter': setWaiter(value);
+            break;
+            case 'client': setClient(value);
+            break;
+            case 'numberTable': setNumberTable(value);
+            break;
+        }
+    }
+
+    const product = order.map(el => {
+        let prueba= {
+            _id: el._id,
+            qty: el.qty,
+        }
+        //console.log('prueba', prueba);
+        return prueba 
+    })
+    const pedido = {
+        userId: null,
+        waiter, 
+        client,
+        product
+    }
+
+    console.log('product', pedido);
 
     const handleProduct = (targetId, targetClassName) => {
         const productId = parseInt(targetId);
@@ -158,7 +190,9 @@ const Home = () => {
 {/* almacenar valores en state Client/order Data? */}
                             <div className="row">
                                 <Label text="Mesero:" />
-                                <Input attribute={{
+                                <Input 
+                                handleInput={handleInput}
+                                attribute={{
                                     id: 'waiter',
                                     name: 'waiter',
                                     type: 'text',
@@ -168,7 +202,9 @@ const Home = () => {
                             
                             <div className="row">
                                 <Label text="Mesa:" />
-                                <Input attribute={{
+                                <Input 
+                                handleInput={handleInput}
+                                attribute={{
                                     id: 'numberTable', 
                                     name: 'numberTable',
                                     type: 'text',
@@ -178,11 +214,14 @@ const Home = () => {
 
                             <div className="row">
                                 <Label text="Cliente:" />
-                                <Input attribute={{
+                                <Input 
+                                handleInput={handleInput}
+                                attribute={{
                                     id: 'client',
                                     name: 'client',
                                     type: 'text',
                                     placeholder: 'Cliente',
+                                   
                                 }} />
                             </div>
                         </div>
