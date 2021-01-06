@@ -1,9 +1,9 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import Login from './pages/Login/Login';
-import Home from './pages/Home/Home'
+import Login from './pages/Login/Login.js';
+import Home from './pages/Home/Home.js'
 
-function Routes() {
+const Routes = () => {
     return(
         <BrowserRouter>
             <Switch>

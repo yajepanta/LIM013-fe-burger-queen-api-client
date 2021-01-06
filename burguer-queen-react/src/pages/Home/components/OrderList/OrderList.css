@@ -1,6 +1,8 @@
 .order-list{
     color:black;
     list-style: none;
+    display: flex;
+    justify-content: space-between;
 }
 .order-list > button {
     border: none;

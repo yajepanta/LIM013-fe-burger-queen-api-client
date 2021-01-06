@@ -3,7 +3,7 @@ import './Label.css';
 
 const Label = ({ text, param }) => {
     return (
-            <label className={ param ? 'label-error' : ''}> { text } </label>
+            <label className={ param ? 'label login label-error' : 'label-login'}> { text } </label>
     );
 };
 

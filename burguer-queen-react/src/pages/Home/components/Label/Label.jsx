@@ -1,9 +1,9 @@
 import React from 'react';
 import './Label.css';
 /* if IS_WAITER: no se edita el input */
-const Label = ({ text, param }) => {
+const Label = ({ text }) => {
     return (
-            <label className={ param ? 'label-error' : ''}> { text } </label>
+            <label> { text } </label>
     );
 };
 

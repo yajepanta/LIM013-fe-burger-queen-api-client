@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../../../../assets/images/logo.svg';
+import logout from '../../../../assets/images/logout.png';
 import './Nav.css';
 
 const Nav = () => {
@@ -7,7 +8,11 @@ const Nav = () => {
         <div>
             <nav>
                 <img src={logo} alt="logo"></img>
-                <span>Cerrar sesión</span>
+                <button className="btn-logout">
+                    <img src={logout} alt="Cerrar sesión"></img>
+                    CERRAR SESIÓN
+                </button>
+                
             </nav>
         </div>
     );

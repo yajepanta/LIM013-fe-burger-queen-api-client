@@ -71,16 +71,17 @@ const Login = () => {
                     console.log(res.token);
                     cookies.set('cookieSession', res.token, { path: '/' });
                     console.log('cookies de sesion:', cookies.get('cookieSession'));
+                    window.location.href= '/home';
                 })
                 .catch(err=>console.log(err));
-                window.location.href= './home';
+                
     }
     
     return (
         <div className='login-view'>
             <div className='login-container'>
                 <img src={logo} alt='Burguer Queen'></img>
-                <div className='row'>
+                <div className='row-login'>
                     <Label text='Correo:' />
                     <Input 
                         attribute={{
@@ -99,7 +100,7 @@ const Login = () => {
                         param={emailError}
                     />
                 }              
-                <div className='row'>
+                <div className='row-login'>
                     <Label text='Contraseña:'/>
                     <Input 
                         attribute={{
