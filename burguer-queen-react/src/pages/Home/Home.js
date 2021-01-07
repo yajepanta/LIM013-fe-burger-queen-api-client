@@ -12,6 +12,7 @@ import OrderList from './components/OrderList/OrderList';
 const Home = () => {
     /* productData es un array que contiene objetos (cada producto), por eso se le puede hacer map */
     const [productData, setProductData] = useState([]);
+
     /* orderArray debería ser un array de objetos con datos de producto (más qty) */
     const [orderArray, setOrderArray] = useState([]);
     /* const [total, setTotal] = useState(); */
@@ -19,6 +20,7 @@ const Home = () => {
     const [numberTable, setNumberTable] = useState();
     const [waiter, setWaiter] = useState();
     let total = [0];
+
 
     const filterByCategory = (name) => {
         fetch('http://localhost:5000/products')
@@ -39,9 +41,11 @@ const Home = () => {
                 qty: null,
             }]
         }; */
+
     const sendOrder = (name) => {
         /* const val = name.value; */
         return console.log('orden enviada:', name);
+
     };
    /*  const handleInput = (name, value) => {
         switch (name){
@@ -70,6 +74,34 @@ const Home = () => {
         client,
         products
     } */
+
+    const handleInput = (name, value) => {
+        switch (name){
+            case 'waiter': setWaiter(value);
+            break;
+            case 'client': setClient(value);
+            break;
+            case 'numberTable': setNumberTable(value);
+            break;
+        }
+    }
+
+    const product = order.map(el => {
+        let prueba= {
+            _id: el._id,
+            qty: el.qty,
+        }
+        //console.log('prueba', prueba);
+        return prueba 
+    })
+    const pedido = {
+        userId: null,
+        waiter, 
+        client,
+        product
+    }
+
+    console.log('product', pedido);
 
     const handleProduct = (targetId, targetClassName) => {
         const productId = parseInt(targetId);
@@ -194,7 +226,9 @@ const Home = () => {
 
                             <div className="row">
                                 <Label text="Mesero:" />
-                                <Input attribute={{
+                                <Input 
+                                handleInput={handleInput}
+                                attribute={{
                                     id: 'waiter',
                                     name: 'waiter',
                                     type: 'text',
@@ -204,7 +238,9 @@ const Home = () => {
                             
                             <div className="row">
                                 <Label text="Mesa:" />
-                                <Input attribute={{
+                                <Input 
+                                handleInput={handleInput}
+                                attribute={{
                                     id: 'numberTable', 
                                     name: 'numberTable',
                                     type: 'text',
@@ -214,11 +250,14 @@ const Home = () => {
 
                             <div className="row">
                                 <Label text="Cliente:" />
-                                <Input attribute={{
+                                <Input 
+                                handleInput={handleInput}
+                                attribute={{
                                     id: 'client',
                                     name: 'client',
                                     type: 'text',
                                     placeholder: 'Cliente',
+                                   
                                 }} />
                             </div>
         
