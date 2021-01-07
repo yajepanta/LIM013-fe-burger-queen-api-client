@@ -9,9 +9,11 @@ const Input = ({ attribute, handleInput }) => {
                 name={attribute.name}
                 placeholder={attribute.placeholder}
                 type={attribute.type}
+
                 onChange={ (e) => handleInput(e.target.name, e.target.value)}
                
             ></input>
+
         
     );
 };

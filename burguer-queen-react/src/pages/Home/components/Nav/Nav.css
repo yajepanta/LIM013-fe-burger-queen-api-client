@@ -12,9 +12,18 @@ nav > img {
     
 }
 
-nav > span {
+.btn-logout {
     color: #ffffff;
-    font-size: larger;
-    font-weight: bolder;
+    font-size: 15px;
+    font-weight: 700;
     padding-right: 2vw;
+    background-color: #EE3124;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+}
+.btn-logout > img {
+    width: 30px;
+    margin-right: 5px;
 }
