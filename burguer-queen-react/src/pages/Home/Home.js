@@ -20,13 +20,27 @@ const Home = () => {
     const [waiter, setWaiter] = useState();
     let total = [0];
 
-    const filterByCategory = (name) => {
-        fetch('http://localhost:5000/products')
+    /* debe ser un array de objetos (con los productos) 
+    se debe llamar al inciar la fx HOME*/
+ /* const getproductData = async () => await fetch('http://localhost:5000/products'); */
+        
+
+    const getproductData = () => fetch('http://localhost:5000/products')
+            .then((resp) => {return resp.json()})
+        
+            .catch(err=> console.log(err));
+    
+    /* setProductData(getproductData) */
+
+    const filterByCategory = async (productData,name) => {
+        
+        return console.log( await getproductData());
+        /* fetch('http://localhost:5000/products')
         .then((resp) => resp.json())
         .then((resp) => resp.filter(el => el.type===name))
         .then (resp => setProductData(resp))
-        .catch(err=> console.log(err));
-    };
+        .catch(err=> console.log(err));*/
+    }; 
     
     /* useEffect(()=> {filterByCategory("breakfast");})  */
     /* Esto se enviará en sendOrder */
@@ -43,9 +57,10 @@ const Home = () => {
         /* const val = name.value; */
         return console.log('orden enviada:', name);
     };
-   /*  const handleInput = (name, value) => {
+    const handleInput = (name, value) => {
+        console.log(name, value);
         switch (name){
-            default: console.log("falta completar");
+            default: console.log(name, value);
             break
             case 'waiter': setWaiter(value);
             break;
@@ -54,7 +69,7 @@ const Home = () => {
             case 'numberTable': setNumberTable(value);
             break;
         }
-    } */
+    }
 
    /*  const products = orderArray.map(el => {
         const prueba= {
@@ -77,10 +92,6 @@ const Home = () => {
         if (productId > 0){ 
             /* objeto con los datos del producto a ingresar */
             const product = productData.find((el)=> {return el._id === productId;});   
-            /* si el producto a ingresar ya se encuentra en el array de productos, solo aumentará +1 qty 
-            mandar parámetro name, si es minusOne, lo que hará será quitar uno a la cantidad de productos
-            si es plusOne, aumentará
-            agregar: if product.qty = 0, delete*/
             switch (targetClassName) {
                 default:
                     /* SE REPITE: 
@@ -90,14 +101,11 @@ const Home = () => {
                         product.qty++;
                         product.total=0;
                         setOrderArray
-                    Retorna: set producto    
+                    Retorna: set producto;
                      */
                     if (orderArray.filter(el => el._id === productId).length > 0) {
                         product.qty++;
                         product.total=0;
-                        const prueba = [];
-                        prueba.push(product);
-                        console.log('producto con push', prueba);
                         setOrderArray(prevState => [...prevState, product]);
                         const orderList = [...new Set(orderArray)]; 
                         return setOrderArray(orderList);
@@ -107,8 +115,7 @@ const Home = () => {
                         return setOrderArray(prevState => [...prevState, product]);
                     };                
                 case ("plusOne"): 
-                        {console.log("me suman o ya existo");
-                        product.qty++;
+                        {product.qty++;
                         product.total=0;
                         setOrderArray(prevState => [...prevState, product]);
                         const orderList = [...new Set(orderArray)]; 
@@ -164,7 +171,8 @@ const Home = () => {
                             text='Almuerzos'
                             id='lunch'
                             name='lunch'
-                            filterByCategory={filterByCategory} /> 
+                            filterByCategory={filterByCategory}
+                            productData={productData} /> 
 
 {/* Render list of products by type */}
                     <div className="products-list" /* onClick={ (e) => handleProduct(e.target.id) } */> 
@@ -186,7 +194,7 @@ const Home = () => {
 {/* Orders section */}
   
                     <section className="order-container"> 
-                        <div className="order-info">
+                        <div className="order-info" onChange={e=>handleInput(e.target.name, e.target.value)}>
                             <div className="row">
                                 <Label text="MI ORDEN" />
                             </div>
@@ -231,7 +239,6 @@ const Home = () => {
                                     total.push(el.total);
                                     return <OrderList key={el._id} product={el} total={el.total} />})}
                             </ul>
-                                {console.log(total)}
                             <Label className="order-total" text={`Total: s/${total.reduce((a , b)=>{return a + b})}`}></Label>
                             {/* <label>Total: {total.reduce((a , b)=>{return a + b})}</label> */}
                             <button className="send-order" onClick={sendOrder}> Enviar a cocina</button>

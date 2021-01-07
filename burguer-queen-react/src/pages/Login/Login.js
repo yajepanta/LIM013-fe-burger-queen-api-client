@@ -64,11 +64,10 @@ const Login = () => {
             const cookies = new Cookies();
             fetch('http://localhost:5000/auth', options)
                 .then((res)=>{ 
-                    if (res.status === 200) {
+                    if (res.status === 200) {  
                         return res.json();
                     }})
                 .then(res=>{
-                    console.log(res.token);
                     cookies.set('cookieSession', res.token, { path: '/' });
                     console.log('cookies de sesion:', cookies.get('cookieSession'));
                     window.location.href= '/home';
