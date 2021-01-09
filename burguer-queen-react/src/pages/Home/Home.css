@@ -1,8 +1,7 @@
 .home-view{
     display: grid;
-    grid-template-columns: 40vw; 
     column-gap: 5vw;
-    padding: 20px 50px 0 50px;
+    padding: 20px 30px 0 30px;
 }
 
 .products-container{
@@ -27,10 +26,23 @@
     padding: 10px;
 }
 
-/* .order-info > label {
+/* Header de Order Info */
+.order-info div:nth-child(1) {
+    background-color: #5E9732;
+    margin: -10px 0 10px -10px ;
+    padding: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+   
+}
+.order-info div:nth-child(1) label {
     color: #FFFFFF;
-} */
+    font-weight: bold;
+}
 
+.order-info div label{
+    margin-left: 12px;
+}
 .send-order{
     color: #FFFFFF;
     background-color: #EE3124;
