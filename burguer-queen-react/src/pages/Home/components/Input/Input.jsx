@@ -4,7 +4,7 @@ import './Input.css';
 const Input = ({ attribute, handleInput }) => {
     return (
         
-            <input
+            <input className='input-order'
                 id={attribute.id}
                 name={attribute.name}
                 placeholder={attribute.placeholder}

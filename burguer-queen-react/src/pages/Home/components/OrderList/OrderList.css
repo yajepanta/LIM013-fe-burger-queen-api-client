@@ -1,16 +1,28 @@
 .order-list{
-    color:black;
+    color: #1a1a1a;
     list-style: none;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 8px;
+    align-items: center;
+}
+.span-product {
+    width: 110px;
 }
 .order-list > button {
     border: none;
-    background-color: #C4C4C4;
+    background-color: #D48000;
     border-radius: 5px;
     font-size: 20px;
+    width: 40px;
+    height: 40px;
     font-weight: 900;
+    color: #fff;
 }
 .order-list > img {
     height: 20px;
+}
+.icon-delete {
+    color: #EE3124;
+    font-size: 28px;
 }

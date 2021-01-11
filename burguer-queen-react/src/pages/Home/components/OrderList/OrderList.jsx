@@ -1,16 +1,16 @@
 import React from 'react';
 import './OrderList.css';
-import deleteIcon from '../../../../assets/images/delete-icon.png';
 
 const OrderList = ({product, total}) => {
     return (
         <li className="order-list" id={product._id}> 
-            <span>{product.name}</span> 
-            <button className="minusOne">--</button>
+            <span className='span-product'>{product.name}</span> 
+            <button className="minusOne" id='minusOne'>-</button>
             <span>{product.qty}</span> 
-            <button className="plusOne">+</button> 
-            <span>s/ {total} </span>
-            <img src={deleteIcon} className="deleteProduct" alt="Delete product"></img> 
+            <button className="plusOne" id='plusOne'>+</button> 
+            <span>S/. {total} </span>
+            <i className="fas fa-trash icon-delete" id='deleteProduct'></i>
+            
         </li>
     );
 };
