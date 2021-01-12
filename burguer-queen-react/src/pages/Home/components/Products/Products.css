@@ -1,0 +1,23 @@
+.product-card{
+    display: flex;
+    flex-direction: column;
+    background-color: #D48000;
+    color: #ffffff;
+    height: 100px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px 20px;
+}
+
+.product-card:hover {
+    box-shadow: 0 0 10px grey;
+}
+.product-card > p:nth-child(1){
+    font-weight: 700;
+    max-block-size: 10%;
+}
+
+.product-card > p:nth-child(2){
+    align-self: flex-end;
+}

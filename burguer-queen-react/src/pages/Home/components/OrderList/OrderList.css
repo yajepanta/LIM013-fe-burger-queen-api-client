@@ -1,0 +1,16 @@
+.order-list{
+    color:black;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+.order-list > button {
+    border: none;
+    background-color: #C4C4C4;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 900;
+}
+.order-list > img {
+    height: 20px;
+}
