@@ -7,3 +7,7 @@
     color: rgba(26, 26, 26, 0.77);
     font-size: 16px;
 }
+
+.menu-filter:hover {
+    box-shadow: 0 0 10px grey;
+}

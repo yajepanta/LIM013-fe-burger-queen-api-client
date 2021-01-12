@@ -1,7 +1,7 @@
 .home-view{
     display: grid;
     column-gap: 5vw;
-    padding: 20px 30px 0 30px;
+    padding: 20px 20px 0 20px;
 }
 
 .products-container{

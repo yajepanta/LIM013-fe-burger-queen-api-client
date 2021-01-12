@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useCallback, useEffect, useState} from 'react';
 import '../Home/Home.css';
 import Label from './components/Label/Label';
 import Input from './components/Input/Input';
@@ -6,44 +6,59 @@ import Nav from './components/Nav/Nav';
 import Menu from './components/Menu/Menu';
 import Products from './components/Products/Products';
 import OrderList from './components/OrderList/OrderList';
+import getAllProducts from '../../controller/products.js'
+import {createOrder, allOrders} from '../../controller/orders.js';
 
 /* import Draggable, {DraggableCore} from 'react-draggable'; */
 
 const Home = () => {
+
     /* productData es un array que contiene objetos (cada producto), por eso se le puede hacer map */
-    const [productData, setProductData] = useState([]);
-    /* orderArray debería ser un array de objetos con datos de producto (más qty) */
     const [orderArray, setOrderArray] = useState([]);
-    /* const [total, setTotal] = useState(); */
+    const [productData, setProductData] = useState(["breakfast"]);
     const [client, setClient] = useState();
     const [numberTable, setNumberTable] = useState();
     const [waiter, setWaiter] = useState();
-    let total = [0];
 
-    const filterByCategory = (name) => {
-        fetch('http://localhost:5000/products')
-        .then((resp) => resp.json())
-        .then((resp) => resp.filter(el => el.type===name))
-        .then (resp => setProductData(resp))
-        .catch(err=> console.log(err));
-    };
+    /* acá pasar el estado (objeto) como parámetro  */
+    const [allProducts, setAllProducts] = useState([]);
     
-    /* useEffect(()=> {filterByCategory("breakfast");})  */
-    /* Esto se enviará en sendOrder */
-     /* const product = {
-            userId: null,
-            client: null,
-            acá recibe orderArray (el array de productos de la orden), y enviamos solo id y qty
-            products: [{
-                productId: null,
-                qty: null,
-            }]
-        }; */
-    const sendOrder = (name) => {
-        /* const val = name.value; */
-        return console.log('orden enviada:', name);
+    useEffect(()=>{
+        getAllProducts()
+        .then(resp => {return setAllProducts(resp)})
+        .catch(err => console.log(err));
+    }, []);
+
+
+    let totalPrice = [0];
+
+    const filterProductsByType = useCallback((name) => {
+        const productsByType = allProducts.filter(el => el.type===name);
+        return setProductData(productsByType);
+    }, [allProducts]);
+
+    useEffect(()=>{
+        const time = new Date().getHours();
+        if (time < 15) {
+            filterProductsByType("breakfast");
+        }
+        else {
+            filterProductsByType("lunch");
+        }
+    }, [filterProductsByType])
+
+    const sendOrder = () => {
+    /* createOrder recibe null porque falta el id de usuario*/
+    /* if orderArray.lenght = 0 no se hace la peticion */
+    const products = orderArray.map(el=> {return ({ productId: el._id, qty: el.qty,})})
+    const body = {
+        userId: null,
+        client: client,
+        products: products
     };
-   /*  const handleInput = (name, value) => {
+        return createOrder("null", body);
+    };
+    const handleInput = (name, value) => {
         switch (name){
             default: console.log("falta completar");
             break
@@ -54,22 +69,7 @@ const Home = () => {
             case 'numberTable': setNumberTable(value);
             break;
         }
-    } */
-
-   /*  const products = orderArray.map(el => {
-        const prueba= {
-            _id: el._id,
-            qty: el.qty,
-        }
-        //console.log('prueba', prueba);
-        return prueba 
-    })
-    const pedido = {
-        userId: null,
-        waiter, 
-        client,
-        products
-    } */
+    }
 
     const handleProduct = (targetId, targetClassName) => {
         const productId = parseInt(targetId);
@@ -77,10 +77,7 @@ const Home = () => {
         if (productId > 0){ 
             /* objeto con los datos del producto a ingresar */
             const product = productData.find((el)=> {return el._id === productId;});   
-            /* si el producto a ingresar ya se encuentra en el array de productos, solo aumentará +1 qty 
-            mandar parámetro name, si es minusOne, lo que hará será quitar uno a la cantidad de productos
-            si es plusOne, aumentará
-            agregar: if product.qty = 0, delete*/
+
             switch (targetClassName) {
                 default:
                     /* SE REPITE: 
@@ -95,9 +92,6 @@ const Home = () => {
                     if (orderArray.filter(el => el._id === productId).length > 0) {
                         product.qty++;
                         product.total=0;
-                        const prueba = [];
-                        prueba.push(product);
-                        console.log('producto con push', prueba);
                         setOrderArray(prevState => [...prevState, product]);
                         const orderList = [...new Set(orderArray)]; 
                         return setOrderArray(orderList);
@@ -124,29 +118,6 @@ const Home = () => {
                         product.total=0;
                         return setOrderArray(orderWithoutProduct);
             }
-
-
-            /* if (orderArray.filter(el => el._id === productId).length > 0 || targetClassName === "plusOne") {
-                product.qty++;
-                console.log('me repito');
-                setOrderArray(prevState => [...prevState, product]);
-                const orderList = [...new Set(orderArray)]; 
-                return setOrderArray(orderList);
-
-            }  */
-            /* si el producto a agregar ya se encuentra en la lista de órdenes Y se le aplica minusOne
-            debe quitarle uno a la cantidad */
-           /*  if (orderArray.filter(el => el._id === productId).length > 0 && targetClassName === "minusOne"){
-                product.qty--;
-                console.log('me quitan');
-                setOrderArray(prevState => [...prevState, product]);
-                const orderList = [...new Set(orderArray)]; 
-                return setOrderArray(orderList);
-            }else {
-                product.qty = 1;
-                console.log('no me repito');
-                return setOrderArray(prevState => [...prevState, product]);
-            } */
         }
     }
 
@@ -156,19 +127,20 @@ const Home = () => {
             <div className="home-view">
                 <section className="products-container">
                     <Menu
-                            text='Desayunos'
-                            id='breakfast'
-                            name='breakfast'
-                            filterByCategory={filterByCategory} />
+                            text="DESAYUNOS"
+                            id="breakfast"
+                            name="breakfast"
+                            filterProductsByType={filterProductsByType} />
                     <Menu
-                            text='Almuerzos'
+                            text="ALMUERZOS"
                             id='lunch'
                             name='lunch'
-                            filterByCategory={filterByCategory} /> 
+                            filterProductsByType={filterProductsByType} /> 
 
 {/* Render list of products by type */}
                     <div className="products-list" /* onClick={ (e) => handleProduct(e.target.id) } */> 
                         {productData.map(product => {
+                            console.log(product._id)
                             return <Products 
                                         key={product._id}
                                         props={{
@@ -188,9 +160,8 @@ const Home = () => {
                     <section className="order-container"> 
                         <div className="order-info">
                             <div className="row">
-                                <Label text="MI ORDEN" />
+                                <Label text="Mi orden" />
                             </div>
-{/* almacenar valores en state Client/order Data? */}
 
                             <div className="row">
                                 <Label text="Mesero:" />
@@ -199,7 +170,8 @@ const Home = () => {
                                     name: 'waiter',
                                     type: 'text',
                                     placeholder: 'Mesero',
-                                }} />
+                                }} 
+                                handleInput={handleInput}/>
                             </div>
                             
                             <div className="row">
@@ -209,30 +181,32 @@ const Home = () => {
                                     name: 'numberTable',
                                     type: 'text',
                                     placeholder: 'Mesa',
-                                }} />
+                                }}
+                                handleInput={handleInput} />
                             </div>
 
                             <div className="row">
                                 <Label text="Cliente:" />
-                                <Input attribute={{
-                                    id: 'client',
-                                    name: 'client',
-                                    type: 'text',
-                                    placeholder: 'Cliente',
-                                }} />
+                                <Input 
+                                    attribute={{
+                                        id: 'client',
+                                        name: 'client',
+                                        type: 'text',
+                                        placeholder: 'Cliente',
+                                    }} 
+                                    handleInput={handleInput}/>
                             </div>
         
                         </div>
-                        {/* Render order */}
-                        <div className="order-products">
-                            <ul onClick={ (e) => handleProduct(e.target.parentNode.id, e.target.className) }>
+{/* Render order */}
+                        <div className="order-produc ts">
+                            <div onClick={ (e) => handleProduct(e.target.parentNode.id, e.target.className) }>
                                 {orderArray.map(el => { 
                                     el.total = el.price*el.qty;
-                                    total.push(el.total);
+                                    totalPrice.push(el.total);
                                     return <OrderList key={el._id} product={el} total={el.total} />})}
-                            </ul>
-                                {console.log(total)}
-                            <Label className="order-total" text={`Total: s/${total.reduce((a , b)=>{return a + b})}`}></Label>
+                            </div>
+                            <Label className="order-total" text={`Total: s/${totalPrice.reduce((a , b)=>{return a + b})}`}></Label>
                             {/* <label>Total: {total.reduce((a , b)=>{return a + b})}</label> */}
                             <button className="send-order" onClick={sendOrder}> Enviar a cocina</button>
                         </div>
