@@ -4,6 +4,7 @@ import './Label.css';
 const Label = ({ text }) => {
     return (
             <label className='label-home'> { text } </label>
+
     );
 };
 

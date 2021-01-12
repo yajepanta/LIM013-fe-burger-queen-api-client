@@ -2,7 +2,6 @@ import React from 'react';
 import './Input.css';
 
 const Input = ({ attribute, handleChange, param}) => {
-    
     return (
         
             <input

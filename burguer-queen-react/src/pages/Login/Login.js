@@ -10,17 +10,10 @@ const Login = () => {
     const [ emailError, setEmailError ] = useState(false);
     const [ password, setPassword ] = useState('');
     const [ passwordError, setPasswordError ] = useState(false);
-    const [ emptyError, setEmptyError ] = useState(false);
+
 
     const regEx = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/;
 
-    const validEmail = (email) => {
-        if(regEx.test(email)){
-            return true
-        }else{
-            return false 
-        }
-    }
 
     const handleChange = (name, value) => {
         switch (name) {
@@ -28,7 +21,7 @@ const Login = () => {
                 setEmailError(true);
                     } else {
                         setUser(value);
-                        setEmailError(false); 
+                        setEmailError(false);         
                     };
             break;        
             case 'password': if (value.length < 6) {
@@ -41,6 +34,19 @@ const Login = () => {
             default: console.log('soy default', name, value);
             break;
         }
+
+        /* if (name === 'email'){
+            console.log(name);
+            console.log('value', value);
+            setUser(value);
+        } else {
+            if (value.length < 6){
+                setPasswordError(true);
+            } else {
+                setPassword(value);
+                setPasswordError(false);
+            }
+        } */
     };
     
     const handleSubmit = () => {
@@ -132,6 +138,7 @@ const Login = () => {
                         text='Necesita completar todos los campos' 
                         param={emptyError}
                     />
+
                 }           
                <button className='login-button' onClick={ handleSubmit } type="submit"> Ingresar </button>
 

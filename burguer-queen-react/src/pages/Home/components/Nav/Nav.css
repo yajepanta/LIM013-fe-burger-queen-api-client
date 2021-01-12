@@ -8,12 +8,13 @@ nav{
 
 nav > img {
     height: 40px;
-    padding: 10px 20px;
+    padding: 2vh;
 }
 
 .btn-logout {
     color: #ffffff;
     font-size: 15px;
+
     background-color: #EE3124;
     border: 1px solid #fff;
     outline: none;
@@ -30,4 +31,6 @@ nav > img {
 }
 .flex-row {
     display: flex;
+
+   
 }

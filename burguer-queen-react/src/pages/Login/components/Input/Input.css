@@ -10,6 +10,14 @@
     outline: none;
 }
 
+.input-login::placeholder {
+    line-height: 47px;
+    color: grey;
+    text-align: center;
+    vertical-align: auto;
+
+}
+
 .input-error {
     border: 1px solid rgb(240, 101, 101);
     color: rgb(240, 101, 101);

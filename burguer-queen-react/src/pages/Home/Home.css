@@ -1,8 +1,8 @@
 .home-view{
     display: grid;
-    grid-template-columns: 40vw; 
     column-gap: 5vw;
-    padding: 20px 50px 0 50px;
+    padding: 20px 20px 0 20px;
+
 }
 
 .products-container{
@@ -37,6 +37,7 @@
 }
 
 .send-order{
+
     background-color: #EE3124;
     border: none;
     width: 100%;
@@ -44,6 +45,7 @@
     border-radius: 8px;
     color: #fff;
     cursor: pointer;
+
 }
 
 .row{
@@ -51,5 +53,7 @@
     flex-direction: row;
     width: 100%;
     margin-bottom: 5px;
+
     align-items: center;    
+
 }
