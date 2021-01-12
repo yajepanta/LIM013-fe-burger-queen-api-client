@@ -58,7 +58,7 @@ const Login = () => {
                 //body: JSON.stringify(account)
                 
               };
-               console.log(account);
+                console.log(account);
                 const cookies = new Cookies();
                 
                 fetch('http://localhost:5000/auth', options)
@@ -72,6 +72,7 @@ const Login = () => {
                         let resJson = JSON.parse(res); // devuelve el string como JSON
 
                         cookies.set('cookieSession', resJson.token, { path: '/' });
+                        cookies.set('cookieEmail', account.email, { path: '/' });
                         console.log('cookies de sesion:', cookies.get('cookieSession'));
                         window.location.href= '/home';
                     })
@@ -82,8 +83,6 @@ const Login = () => {
           
     }
 
-    
-    
     return (
         <div className='login-view flex-center'>
             <div className='login-container flex-center'>

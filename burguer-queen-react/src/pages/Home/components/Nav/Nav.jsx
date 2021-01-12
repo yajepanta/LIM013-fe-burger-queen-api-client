@@ -8,8 +8,9 @@ import './Nav.css';
 const cookies = new Cookies();
 
 const logOut = () => {
-    cookies.remove('id', {path:'/'});
-    cookies.remove('email', {path:'/'});
+    //cookies.remove('id', {path:'/'});
+    cookies.remove('cookieSession', {path:'/'});
+    cookies.remove('cookieEmail', {path:'/'})
     window.location.href = './'
 }
 

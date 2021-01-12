@@ -24,37 +24,31 @@ const Home = () => {
   let total = [0];
 
   console.log("Bienvenido", cookies.get("cookieSession"));
+  console.log("Bienvenido correo", cookies.get("cookieEmail"));
+  const cookieSession = cookies.get("cookieSession");
+  const cookieEmail = cookies.get("cookieEmail");
+
+  /*-----------------TRAYENDO LA DATA DEL USUARIO---------------------------------------* */
+  /*if(cookieSession){
+    
+    fetch('http://localhost:5000/users')
+    .then(response => {
+        return response.json();
+      })
+    .then(data => {
+        let dataJson = JSON.parse(data)
+        console.log('dataJson', dataJson);
+      })
+    .catch(err => {
+        console.log("Error Reading data " + err);
+      });
+  }else{
+    console.log('Fuera de Sesión');
+  }*/
 
   /* debe ser un array de objetos (con los productos) 
     se debe llamar al inciar la fx HOME*/
   /* const getproductData = async () => await fetch('http://localhost:5000/products'); */
-
-  const getproductData = () =>
-    fetch("http://localhost:5000/products")
-      .then((resp) => {
-        return resp.json();
-      })
-
-      .catch((err) => console.log(err));
-
-  /* setProductData(getproductData) */
-
-  //const filterByCategory = async (productData,name) => {
-
-  //return console.log( await getproductData());
-  /* fetch('http://localhost:5000/products')
-    
-    /* useEffect(()=> {filterByCategory("breakfast");})  */
-  /* Esto se enviará en sendOrder */
-  /* const product = {
-            userId: null,
-            client: null,
-            acá recibe orderArray (el array de productos de la orden), y enviamos solo id y qty
-            products: [{
-                productId: null,
-                qty: null,
-            }]
-        }; */
 
   const filterByCategory = (name) => {
     fetch("http://localhost:5000/products")
@@ -64,12 +58,9 @@ const Home = () => {
       .catch((err) => console.log(err));
   };
 
-  const sendOrder = (name) => {
-    /* const val = name.value; */
-    return console.log("orden enviada:", name);
-  };
+  
   const handleInput = (name, value) => {
-    console.log(name, value);
+    //console.log(name, value);
     switch (name) {
       default:
         console.log(name, value);
@@ -85,21 +76,6 @@ const Home = () => {
         break;
     }
   };
-
-  /*  const products = orderArray.map(el => {
-        const prueba= {
-            _id: el._id,
-            qty: el.qty,
-        }
-        //console.log('prueba', prueba);
-        return prueba 
-    })
-    const pedido = {
-        userId: null,
-        waiter, 
-        client,
-        products
-    } */
 
   const product = orderArray.map((el) => {
     let prueba = {
@@ -118,6 +94,40 @@ const Home = () => {
   };
 
   console.log("product", pedido);
+
+  const sendOrder = () => {
+    /* const val = name.value; */
+    if(pedido.client && pedido.product){
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            
+            body: JSON.stringify(pedido)
+            
+          };
+            //console.log(pedido);
+            //const cookies = new Cookies();
+            
+            fetch('http://localhost:5000/orders', options)
+                .then((res)=>{ 
+                    console.log('resOrders', res);
+                    if (res.status === 200) {  
+                        return res.json()
+                    }})
+                .then(res=>{
+                    //JSON.parse(res) //convierte el string en json
+                    //let resJson = JSON.parse(res); // devuelve el string como JSON
+                    console.log('resESPERADO', res);
+                })
+                .catch(err=>console.log(err));
+    }else{
+        alert('Debe seleccionar un producto!')
+    }
+    
+  };
 
   const handleProduct = (targetId, targetClassName) => {
     const productId = parseInt(targetId);
@@ -172,28 +182,6 @@ const Home = () => {
           product.total = 0;
           return setOrderArray(orderWithoutProduct);
       }
-
-      /* if (orderArray.filter(el => el._id === productId).length > 0 || targetClassName === "plusOne") {
-                product.qty++;
-                console.log('me repito');
-                setOrderArray(prevState => [...prevState, product]);
-                const orderList = [...new Set(orderArray)]; 
-                return setOrderArray(orderList);
-
-            }  */
-      /* si el producto a agregar ya se encuentra en la lista de órdenes Y se le aplica minusOne
-            debe quitarle uno a la cantidad */
-      /*  if (orderArray.filter(el => el._id === productId).length > 0 && targetClassName === "minusOne"){
-                product.qty--;
-                console.log('me quitan');
-                setOrderArray(prevState => [...prevState, product]);
-                const orderList = [...new Set(orderArray)]; 
-                return setOrderArray(orderList);
-            }else {
-                product.qty = 1;
-                console.log('no me repito');
-                return setOrderArray(prevState => [...prevState, product]);
-            } */
     }
   };
 
@@ -308,7 +296,7 @@ const Home = () => {
             </div>
             <Label
               className="order-total"
-              text={`Total: s/${total.reduce((a, b) => {
+              text={`Total: S/.${total.reduce((a, b) => {
                 return a + b;
               })}`}
             ></Label>
