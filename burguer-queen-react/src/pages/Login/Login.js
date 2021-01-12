@@ -11,7 +11,9 @@ const Login = () => {
     const [ password, setPassword ] = useState('');
     const [ passwordError, setPasswordError ] = useState(false);
 
+
     const regEx = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/;
+
 
     const handleChange = (name, value) => {
         switch (name) {
@@ -52,38 +54,48 @@ const Login = () => {
             email: email,
             password: password
           }
-          const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(account)
-            
-          };
-           console.log(account);
-            const cookies = new Cookies();
-            fetch('http://localhost:5000/auth', options)
-                .then((res)=>{ 
-                    if (res.status === 200) {
-                        return res.json();
-                    }})
-                .then(res=>{
-                    console.log(res.token);
-                    cookies.set('cookieSession', res.token, { path: '/' });
-                    console.log('cookies de sesion:', cookies.get('cookieSession'));
-                    window.location.href= '/home';
-                })
-                .catch(err=>console.log(err));
+          if(account.email && account.password){
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                //body: JSON.stringify(account)
                 
+              };
+                console.log(account);
+                const cookies = new Cookies();
+                
+                fetch('http://localhost:5000/auth', options)
+                    .then((res)=>{ 
+                        console.log('res', res);
+                        if (res.status === 200) {  
+                            return res.text()
+                        }})
+                    .then(res=>{
+                        //JSON.parse(res) //convierte el string en json
+                        let resJson = JSON.parse(res); // devuelve el string como JSON
+
+                        cookies.set('cookieSession', resJson.token, { path: '/' });
+                        cookies.set('cookieEmail', account.email, { path: '/' });
+                        console.log('cookies de sesion:', cookies.get('cookieSession'));
+                        window.location.href= '/home';
+                    })
+                    .catch(err=>console.log(err));
+          }else{
+                setEmptyError(true);
+          }
+          
     }
-    
+
     return (
-        <div className='login-view'>
-            <div className='login-container'>
+        <div className='login-view flex-center'>
+            <div className='login-container flex-center'>
                 <img src={logo} alt='Burguer Queen'></img>
                 <div className='row-login'>
                     <Label text='Correo:' />
-                    <Input 
+                    <Input data-testid='input-handle'
                         attribute={{
                             id: 'email',
                             name: 'email',
@@ -119,6 +131,14 @@ const Login = () => {
                         text='La contraseña ingresada es inválida o muy corta.' 
                         param={passwordError}
                     />
+                }  
+
+                { emptyError &&
+                    <Label 
+                        text='Necesita completar todos los campos' 
+                        param={emptyError}
+                    />
+
                 }           
                <button className='login-button' onClick={ handleSubmit } type="submit"> Ingresar </button>
 

@@ -1,5 +1,7 @@
-label {
+
+.label-home {
     color: rgba(26, 26, 26, 0.77);
-    width: 90px;
-    line-height: 30px;
+    font-size: 20px;
+    outline: none;
 }
+

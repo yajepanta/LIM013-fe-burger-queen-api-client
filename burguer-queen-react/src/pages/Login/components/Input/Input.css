@@ -1,12 +1,13 @@
 .input-login {
-    width: 350px;
+    width: 70%;
+    padding: 0px 30px;
     height: 60px;
-    left: 564px;
-    top: 422px;
     background: #FFFFFF;
     border-radius: 50px;
     font-size: 20px;
+    color: grey;
     border: none;
+    outline: none;
 }
 
 .input-login::placeholder {
@@ -14,6 +15,7 @@
     color: grey;
     text-align: center;
     vertical-align: auto;
+
 }
 
 .input-error {

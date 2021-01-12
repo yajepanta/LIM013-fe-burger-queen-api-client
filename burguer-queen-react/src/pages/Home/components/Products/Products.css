@@ -1,13 +1,14 @@
 .product-card{
-    display: flex;
-    flex-direction: column;
-    background-color: #D48000;
-    color: #ffffff;
+
+    color: #343a40;
     height: 100px;
     width: 120px;
-    border-radius: 10px;
+    border-radius: 8px;
     margin: 5px;
-    padding: 5px 20px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
 }
 
 .product-card:hover {
@@ -20,4 +21,5 @@
 
 .product-card > p:nth-child(2){
     align-self: flex-end;
+
 }

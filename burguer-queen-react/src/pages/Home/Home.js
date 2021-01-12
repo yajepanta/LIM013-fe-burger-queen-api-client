@@ -81,6 +81,7 @@ const Home = () => {
             switch (targetClassName) {
                 default:
                     /* SE REPITE: 
+
                     nueva fx (
                         params: product (objeto. el producto en específico, que ya lo buscamos x id), 
                             )

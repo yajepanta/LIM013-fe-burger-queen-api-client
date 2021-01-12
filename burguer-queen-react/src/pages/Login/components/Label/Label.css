@@ -1,12 +1,14 @@
 .label-login {
+    width: 30%;
     color: rgba(26, 26, 26, 0.77);
     font-size: 20px;
     line-height: 50px;
 }
 
 .label-error {
-    font-size:20px;
-    color: rgb(240, 101, 101);
-    width: 500px;
     text-align: center;
+    font-size: 18px;
+    color: rgb(240, 101, 101);
+    width: 100%;
+
 }
