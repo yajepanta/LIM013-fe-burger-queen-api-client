@@ -19,7 +19,7 @@ const Home = () => {
     const [client, setClient] = useState();
     /* const [numberTable, setNumberTable] = useState();
     const [waiter, setWaiter] = useState(); */
-
+    
     /* acá pasar el estado (objeto) como parámetro  */
     const [allProducts, setAllProducts] = useState([]);
     

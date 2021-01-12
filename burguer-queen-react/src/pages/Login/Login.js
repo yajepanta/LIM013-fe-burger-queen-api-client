@@ -10,7 +10,7 @@ const Login = () => {
     const [ emailError, setEmailError ] = useState(false);
     const [ password, setPassword ] = useState('');
     const [ passwordError, setPasswordError ] = useState(false);
-
+    const [emptyError, setEmptyError] = useState(false);
 
     const regEx = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/;
 
