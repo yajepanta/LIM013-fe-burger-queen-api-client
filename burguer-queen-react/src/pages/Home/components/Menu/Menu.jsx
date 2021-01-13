@@ -12,7 +12,6 @@ const Menu = ({name, id, text, filterProductsByType, paramIcon}) => {
                 name={name}
                 id={id}
                 type="button"
-
                 onClick={(e) => {filterProductsByType(e.target.name)}}>
                 <i className={paramIcon}></i> {text}
 

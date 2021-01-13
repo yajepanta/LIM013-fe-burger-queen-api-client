@@ -23,16 +23,16 @@ const Nav = () => {
                 <img src={logo} alt="logo"></img>
                 <div className='options flex-row'>
                     <button className="btn-logout">
-                        <i class="fas fa-sign-out-alt"></i> ?
+                        <i className="fas fa-sign-out-alt"></i> ?
                     </button>
                     <button className="btn-logout">
-                        <i class="fas fa-sign-out-alt"></i> PENDIENTES
+                        <i className="fas fa-sign-out-alt"></i> PENDIENTES
                     </button>
                     <button className="btn-logout">
-                        <i class="fas fa-sign-out-alt"></i> LISTOS
+                        <i className="fas fa-sign-out-alt"></i> LISTOS
                     </button>
                     <button className="btn-logout" onClick={logOut}>
-                        <i class="fas fa-sign-out-alt"></i> CERRAR SESIÓN
+                        <i className="fas fa-sign-out-alt"></i> CERRAR SESIÓN
                     </button>          
                 </div>      
             </nav>

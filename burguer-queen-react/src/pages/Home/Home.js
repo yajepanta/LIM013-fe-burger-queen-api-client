@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState} from 'react';
 import '../Home/Home.css';
 import Label from './components/Label/Label';
 import Input from './components/Input/Input';
-import Nav from './components/Nav/Nav';
+import Nav from '../commons/Nav/Nav';
 import Menu from './components/Menu/Menu';
 import Products from './components/Products/Products';
 import OrderList from './components/OrderList/OrderList';
@@ -17,8 +17,7 @@ const Home = () => {
     const [orderArray, setOrderArray] = useState([]);
     const [productData, setProductData] = useState(["breakfast"]);
     const [client, setClient] = useState();
-    /* const [numberTable, setNumberTable] = useState();
-    const [waiter, setWaiter] = useState(); */
+    const [numberTable, setNumberTable] = useState();
     
     /* acá pasar el estado (objeto) como parámetro  */
     const [allProducts, setAllProducts] = useState([]);
@@ -60,12 +59,10 @@ const Home = () => {
     const handleInput = (name, value) => {
         switch (name){
             default: console.log("falta completar");
-            break
-            case 'waiter': console.log("falta completar");
             break;
             case 'client': setClient(value);
             break;
-            case 'numberTable': console.log("falta completar");
+            case 'numberTable': setNumberTable(value);
             break;
         }
     }
@@ -130,7 +127,7 @@ const Home = () => {
                             id="breakfast"
                             name="breakfast"
                             filterProductsByType={filterProductsByType}
-                            paramIcom="fas fa-coffee" />
+                            paramIcom="fas fa-lunch" />
                     <Menu
                             text="ALMUERZOS"
                             id='lunch'
@@ -163,17 +160,6 @@ const Home = () => {
                             <div className="row">
                                 <Label text="Mi orden" />
                             </div>
-
-                            <div className="row">
-                                <Label text="Mesero:" />
-                                <Input attribute={{
-                                    id: 'waiter',
-                                    name: 'waiter',
-                                    type: 'text',
-                                    placeholder: 'Mesero',
-                                }} 
-                                handleInput={handleInput}/>
-                            </div>
                             
                             <div className="row">
                                 <Label text="Mesa:" />
@@ -200,7 +186,7 @@ const Home = () => {
         
                         </div>
 {/* Render order */}
-                        <div className="order-produc ts">
+                        <div className="order-products">
                             <div onClick={ (e) => handleProduct(e.target.parentNode.id, e.target.className) }>
                                 {orderArray.map(el => { 
                                     el.total = el.price*el.qty;

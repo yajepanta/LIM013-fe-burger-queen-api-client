@@ -1,6 +1,6 @@
 import './App.css';
 
-import Route from './Routes.js';
+import Route from './router/Routes.js';
 
 
 function App() {
