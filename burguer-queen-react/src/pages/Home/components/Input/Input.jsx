@@ -1,10 +1,12 @@
 import React from 'react';
 import './Input.css';
 
+
 const Input = ({ attribute, handleInput }) => {
     return (
         
-            <input
+            <input className='input-order'
+
                 id={attribute.id}
                 name={attribute.name}
                 placeholder={attribute.placeholder}
@@ -13,6 +15,7 @@ const Input = ({ attribute, handleInput }) => {
                 onChange={ (e) => handleInput(e.target.name, e.target.value)}
                
             ></input>
+
 
         
     );

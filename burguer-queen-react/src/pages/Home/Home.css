@@ -1,8 +1,8 @@
 .home-view{
     display: grid;
-    grid-template-columns: 40vw; 
     column-gap: 5vw;
-    padding: 20px 50px 0 50px;
+    padding: 20px 20px 0 20px;
+
 }
 
 .products-container{
@@ -16,21 +16,46 @@
 
 .order-container {
     grid-column: 2;
-    display: flex;
-    flex-direction: column;
+    background-color:#f8f9fa;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.125);
+    padding: 10px 0;
 }
 
 .order-info{
-    background-color: #90BE6D;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 10px;
 }
 
-/* .order-info > label {
-    color: #FFFFFF;
-} */
+.order-products {
+    background-color: #ffff;
+    padding: 10px;
+}
 
+.list-order {
+    width: 100%;
+}
+
+
+
+
+/* Header de Order Info */
+.order-info div:nth-child(1) {
+    background-color: #5E9732;
+    margin: -10px 0 10px -10px ;
+    padding: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+   
+}
+.order-info div:nth-child(1) label {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.order-info div label{
+    margin-left: 12px;
+}
 .send-order{
     color: #FFFFFF;
     background-color: #EE3124;

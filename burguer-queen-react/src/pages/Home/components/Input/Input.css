@@ -1,12 +1,15 @@
 .input-order {
+
     width: 200px;
-    height: 40px;
+    height: 30px;
     background: #FFFFFF;
     border-radius: 8px;
+    padding-left: 15px;
     border: none;
 }
 
 .input-order::placeholder {
     color: grey;
-    text-align: center;
+    /* text-align: center; */
 }
+
