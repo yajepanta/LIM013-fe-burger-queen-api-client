@@ -12,7 +12,7 @@ const logOut = () => {
     //cookies.remove('id', {path:'/'});
     cookies.remove('cookieSession', {path:'/'});
     cookies.remove('cookieEmail', {path:'/'})
-    window.location.href = './'
+    window.location.href = './';
 }
 
 const Nav = () => {
@@ -23,14 +23,18 @@ const Nav = () => {
                 <img src={logo} alt="logo"></img>
                 <div className='options flex-row'>
                     <button className="btn-logout">
-                        <i className='fas fa-user'></i> 123456
+                        <i class="fas fa-sign-out-alt"></i> ?
+                    </button>
+                    <button className="btn-logout">
+                        <i class="fas fa-sign-out-alt"></i> PENDIENTES
+                    </button>
+                    <button className="btn-logout">
+                        <i class="fas fa-sign-out-alt"></i> LISTOS
                     </button>
                     <button className="btn-logout" onClick={logOut}>
                         <i class="fas fa-sign-out-alt"></i> CERRAR SESIÓN
-                    </button>
-                </div>
-
-                
+                    </button>          
+                </div>      
             </nav>
         </div>
     );

@@ -29,9 +29,8 @@ const Home = () => {
         .catch(err => console.log(err));
     }, []);
 
-
     let totalPrice = [0];
-
+    
     const filterProductsByType = useCallback((name) => {
         const productsByType = allProducts.filter(el => el.type===name);
         return setProductData(productsByType);
@@ -45,7 +44,7 @@ const Home = () => {
         else {
             filterProductsByType("lunch");
         }
-    }, [filterProductsByType])
+    }, [filterProductsByType]);
 
     const sendOrder = () => {
     /* createOrder recibe null porque falta el id de usuario*/
@@ -77,7 +76,8 @@ const Home = () => {
         if (productId > 0){ 
             /* objeto con los datos del producto a ingresar */
             const product = productData.find((el)=> {return el._id === productId;});   
-
+            
+            
             switch (targetClassName) {
                 default:
                     /* SE REPITE: 
@@ -110,7 +110,7 @@ const Home = () => {
                         return setOrderArray(orderList); }       
                 case ("minusOne"): 
                         {product.qty--;
-                        product.total=0;
+                        product.total = 0;
                         setOrderArray(prevState => [...prevState, product]);
                         const orderList = [...new Set(orderArray)]; 
                         return setOrderArray(orderList);}
@@ -129,17 +129,19 @@ const Home = () => {
                             text="DESAYUNOS"
                             id="breakfast"
                             name="breakfast"
-                            filterProductsByType={filterProductsByType} />
+                            filterProductsByType={filterProductsByType}
+                            paramIcom="fas fa-coffee" />
                     <Menu
                             text="ALMUERZOS"
                             id='lunch'
                             name='lunch'
-                            filterProductsByType={filterProductsByType} /> 
+                            filterProductsByType={filterProductsByType}
+                            paramIcon="fas fa-hamburger"/> 
 
 {/* Render list of products by type */}
                     <div className="products-list" /* onClick={ (e) => handleProduct(e.target.id) } */> 
                         {productData.map(product => {
-                            console.log(product._id)
+                            console.log("render")
                             return <Products 
                                         key={product._id}
                                         props={{
