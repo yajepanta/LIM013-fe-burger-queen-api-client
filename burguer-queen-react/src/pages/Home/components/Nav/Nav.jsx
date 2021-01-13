@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../../../../assets/images/logo.svg';
 
+
 import Cookies from 'universal-cookie';
 
 import './Nav.css';
@@ -25,6 +26,7 @@ const Nav = () => {
                         <i class="fas fa-sign-out-alt"></i> CERRAR SESIÓN
                     </button>
                 </div>
+
                 
             </nav>
         </div>
