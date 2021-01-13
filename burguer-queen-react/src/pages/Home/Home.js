@@ -29,22 +29,23 @@ const Home = () => {
   const cookieEmail = cookies.get("cookieEmail");
 
   /*-----------------TRAYENDO LA DATA DEL USUARIO---------------------------------------* */
-  /*if(cookieSession){
+  if(cookieSession){
     
-    fetch('http://localhost:5000/users')
+    fetch('http://localhost:5000/users/admin@hotmail.com')
     .then(response => {
+        console.log('response',response);
         return response.json();
       })
     .then(data => {
-        let dataJson = JSON.parse(data)
-        console.log('dataJson', dataJson);
+        //let dataJson = JSON.parse(data)
+        console.log('dataJson', data);
       })
     .catch(err => {
         console.log("Error Reading data " + err);
       });
   }else{
     console.log('Fuera de Sesión');
-  }*/
+  }
 
   /* debe ser un array de objetos (con los productos) 
     se debe llamar al inciar la fx HOME*/
@@ -150,7 +151,7 @@ const Home = () => {
                     Retorna: set producto;
                      */
           if (orderArray.filter((el) => el._id === productId).length > 0) {
-            console.log('error', orderArray);
+            //console.log('error', orderArray);
             product.qty++;
             product.total = 0;
             setOrderArray((prevState) => [...prevState, product]);

@@ -21,9 +21,6 @@ const Nav = () => {
             <nav>
                 <img src={logo} alt="logo"></img>
                 <div className='options flex-row'>
-                    <button className="btn-logout">
-                        <i className='fas fa-user'></i> 123456
-                    </button>
                     <button className="btn-logout" onClick={logOut}>
                         <i class="fas fa-sign-out-alt"></i> CERRAR SESIÓN
                     </button>

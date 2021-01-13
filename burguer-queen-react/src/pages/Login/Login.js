@@ -5,22 +5,22 @@ import Label from './components/Label/Label';
 import Input from './components/Input/Input';
 import Cookies from 'universal-cookie';
 
+const regEx = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/;
+
+export const validEmail = (email) => {
+    if(regEx.test(email)){
+        return true
+    }else{
+        return false 
+    }
+} 
+
 const Login = () => {
     const [ email, setUser ] = useState('');
     const [ emailError, setEmailError ] = useState(false);
     const [ password, setPassword ] = useState('');
     const [ passwordError, setPasswordError ] = useState(false);
     const [ emptyError, setEmptyError ] = useState(false);
-
-    const regEx = /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/;
-
-    const validEmail = (email) => {
-        if(regEx.test(email)){
-            return true
-        }else{
-            return false 
-        }
-    }
 
     const handleChange = (name, value) => {
         switch (name) {
