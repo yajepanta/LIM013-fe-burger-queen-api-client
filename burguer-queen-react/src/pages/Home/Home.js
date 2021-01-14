@@ -31,6 +31,7 @@ const Home = () => {
     let totalPrice = [0];
     
     const filterProductsByType = useCallback((name) => {
+        //console.log('allProducts', allProducts);
         const productsByType = allProducts.filter(el => el.type===name);
         return setProductData(productsByType);
     }, [allProducts]);
@@ -78,7 +79,6 @@ const Home = () => {
             switch (targetClassName) {
                 default:
                     /* SE REPITE: 
-
                     nueva fx (
                         params: product (objeto. el producto en específico, que ya lo buscamos x id), 
                             )
@@ -106,11 +106,19 @@ const Home = () => {
                         const orderList = [...new Set(orderArray)]; 
                         return setOrderArray(orderList); }       
                 case ("minusOne"): 
-                        {product.qty--;
+                    {
+                        product.qty--;
                         product.total = 0;
-                        setOrderArray(prevState => [...prevState, product]);
-                        const orderList = [...new Set(orderArray)]; 
-                        return setOrderArray(orderList);}
+                        if(product.qty > 0){
+                            setOrderArray(prevState => [...prevState, product]);
+                            const orderList = [...new Set(orderArray)]; 
+                            return setOrderArray(orderList)
+                        }else{
+                            alert('No puede ser negativo...');
+                            product.qty = 0;
+                            //return setOrderArray(orderList)
+                        }
+                    }
                 case ("deleteProduct"):
                         return setOrderArray(deleteProduct(orderArray, productId));
             }
@@ -127,7 +135,7 @@ const Home = () => {
                             id="breakfast"
                             name="breakfast"
                             filterProductsByType={filterProductsByType}
-                            paramIcom="fas fa-lunch" />
+                            paramIcon="fas fa-coffee" />
                     <Menu
                             text="ALMUERZOS"
                             id='lunch'
@@ -138,7 +146,7 @@ const Home = () => {
 {/* Render list of products by type */}
                     <div className="products-list" /* onClick={ (e) => handleProduct(e.target.id) } */> 
                         {productData.map(product => {
-                            console.log("render")
+                            //console.log("render")
                             return <Products 
                                         key={product._id}
                                         props={{
