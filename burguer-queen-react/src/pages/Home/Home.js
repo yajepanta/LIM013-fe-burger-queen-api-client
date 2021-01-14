@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState} from 'react';
 import '../Home/Home.css';
 import Label from './components/Label/Label';
 import Input from './components/Input/Input';
-import Nav from './components/Nav/Nav';
+import Nav from '../commons/Nav/Nav';
 import Menu from './components/Menu/Menu';
 import Products from './components/Products/Products';
 import OrderList from './components/OrderList/OrderList';
@@ -17,8 +17,7 @@ const Home = () => {
     const [orderArray, setOrderArray] = useState([]);
     const [productData, setProductData] = useState(["breakfast"]);
     const [client, setClient] = useState();
-    /* const [numberTable, setNumberTable] = useState();
-    const [waiter, setWaiter] = useState(); */
+    const [numberTable, setNumberTable] = useState();
     
     /* acá pasar el estado (objeto) como parámetro  */
     const [allProducts, setAllProducts] = useState([]);
@@ -29,9 +28,8 @@ const Home = () => {
         .catch(err => console.log(err));
     }, []);
 
-
     let totalPrice = [0];
-
+    
     const filterProductsByType = useCallback((name) => {
         const productsByType = allProducts.filter(el => el.type===name);
         return setProductData(productsByType);
@@ -45,7 +43,7 @@ const Home = () => {
         else {
             filterProductsByType("lunch");
         }
-    }, [filterProductsByType])
+    }, [filterProductsByType]);
 
     const sendOrder = () => {
     /* createOrder recibe null porque falta el id de usuario*/
@@ -61,12 +59,10 @@ const Home = () => {
     const handleInput = (name, value) => {
         switch (name){
             default: console.log("falta completar");
-            break
-            case 'waiter': console.log("falta completar");
             break;
             case 'client': setClient(value);
             break;
-            case 'numberTable': console.log("falta completar");
+            case 'numberTable': setNumberTable(value);
             break;
         }
     }
@@ -77,7 +73,8 @@ const Home = () => {
         if (productId > 0){ 
             /* objeto con los datos del producto a ingresar */
             const product = productData.find((el)=> {return el._id === productId;});   
-
+            
+            
             switch (targetClassName) {
                 default:
                     /* SE REPITE: 
@@ -110,7 +107,7 @@ const Home = () => {
                         return setOrderArray(orderList); }       
                 case ("minusOne"): 
                         {product.qty--;
-                        product.total=0;
+                        product.total = 0;
                         setOrderArray(prevState => [...prevState, product]);
                         const orderList = [...new Set(orderArray)]; 
                         return setOrderArray(orderList);}
@@ -129,17 +126,19 @@ const Home = () => {
                             text="DESAYUNOS"
                             id="breakfast"
                             name="breakfast"
-                            filterProductsByType={filterProductsByType} />
+                            filterProductsByType={filterProductsByType}
+                            paramIcom="fas fa-lunch" />
                     <Menu
                             text="ALMUERZOS"
                             id='lunch'
                             name='lunch'
-                            filterProductsByType={filterProductsByType} /> 
+                            filterProductsByType={filterProductsByType}
+                            paramIcon="fas fa-hamburger"/> 
 
 {/* Render list of products by type */}
                     <div className="products-list" /* onClick={ (e) => handleProduct(e.target.id) } */> 
                         {productData.map(product => {
-                            console.log(product._id)
+                            console.log("render")
                             return <Products 
                                         key={product._id}
                                         props={{
@@ -160,17 +159,6 @@ const Home = () => {
                         <div className="order-info">
                             <div className="row">
                                 <Label text="Mi orden" />
-                            </div>
-
-                            <div className="row">
-                                <Label text="Mesero:" />
-                                <Input attribute={{
-                                    id: 'waiter',
-                                    name: 'waiter',
-                                    type: 'text',
-                                    placeholder: 'Mesero',
-                                }} 
-                                handleInput={handleInput}/>
                             </div>
                             
                             <div className="row">
@@ -198,7 +186,7 @@ const Home = () => {
         
                         </div>
 {/* Render order */}
-                        <div className="order-produc ts">
+                        <div className="order-products">
                             <div onClick={ (e) => handleProduct(e.target.parentNode.id, e.target.className) }>
                                 {orderArray.map(el => { 
                                     el.total = el.price*el.qty;

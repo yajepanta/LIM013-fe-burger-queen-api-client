@@ -5,15 +5,14 @@ import './Menu.css';
 y tb otro texto con el nombre de la categoría, que será vista
 on click: va a filtrar */
 
-const Menu = ({name, id, text, filterByCategory, paramIcon}) => {
+const Menu = ({name, id, text, filterProductsByType, paramIcon}) => {
 
     return (
             <button className="menu-filter"
                 name={name}
                 id={id}
                 type="button"
-
-                onClick={(e) => {filterByCategory(e.target.name)}}>
+                onClick={(e) => {filterProductsByType(e.target.name)}}>
                 <i className={paramIcon}></i> {text}
 
             </button>
