@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState} from 'react';
 import '../Home/Home.css';
 import Label from './components/Label/Label';
 import Input from './components/Input/Input';
-import Nav from './components/Nav/Nav';
+import Nav from '../commons/Nav/Nav';
 import Menu from './components/Menu/Menu';
 import Products from './components/Products/Products';
 import OrderList from './components/OrderList/OrderList';
@@ -17,29 +17,8 @@ const Home = () => {
     const [orderArray, setOrderArray] = useState([]);
     const [productData, setProductData] = useState(["breakfast"]);
     const [client, setClient] = useState();
-    /* const [numberTable, setNumberTable] = useState();
-    const [waiter, setWaiter] = useState(); */
-
-<<<<<<< HEAD
-  /*-----------------TRAYENDO LA DATA DEL USUARIO---------------------------------------* */
-  if(cookieSession){
+    const [numberTable, setNumberTable] = useState();
     
-    fetch('http://localhost:5000/users/admin@hotmail.com')
-    .then(response => {
-        console.log('response',response);
-        return response.json();
-      })
-    .then(data => {
-        //let dataJson = JSON.parse(data)
-        console.log('dataJson', data);
-      })
-    .catch(err => {
-        console.log("Error Reading data " + err);
-      });
-  }else{
-    console.log('Fuera de Sesión');
-  }
-=======
     /* acá pasar el estado (objeto) como parámetro  */
     const [allProducts, setAllProducts] = useState([]);
     
@@ -48,12 +27,11 @@ const Home = () => {
         .then(resp => {return setAllProducts(resp)})
         .catch(err => console.log(err));
     }, []);
->>>>>>> 557c722259f5e9eeba64ed1d1e41852fcf43f1e8
-
 
     let totalPrice = [0];
-
+    
     const filterProductsByType = useCallback((name) => {
+        //console.log('allProducts', allProducts);
         const productsByType = allProducts.filter(el => el.type===name);
         return setProductData(productsByType);
     }, [allProducts]);
@@ -66,7 +44,7 @@ const Home = () => {
         else {
             filterProductsByType("lunch");
         }
-    }, [filterProductsByType])
+    }, [filterProductsByType]);
 
     const sendOrder = () => {
     /* createOrder recibe null porque falta el id de usuario*/
@@ -82,12 +60,10 @@ const Home = () => {
     const handleInput = (name, value) => {
         switch (name){
             default: console.log("falta completar");
-            break
-            case 'waiter': console.log("falta completar");
             break;
             case 'client': setClient(value);
             break;
-            case 'numberTable': console.log("falta completar");
+            case 'numberTable': setNumberTable(value);
             break;
         }
     }
@@ -98,11 +74,11 @@ const Home = () => {
         if (productId > 0){ 
             /* objeto con los datos del producto a ingresar */
             const product = productData.find((el)=> {return el._id === productId;});   
-
+            
+            
             switch (targetClassName) {
                 default:
                     /* SE REPITE: 
-
                     nueva fx (
                         params: product (objeto. el producto en específico, que ya lo buscamos x id), 
                             )
@@ -111,33 +87,6 @@ const Home = () => {
                         setOrderArray
                     Retorna: set producto    
                      */
-<<<<<<< HEAD
-          if (orderArray.filter((el) => el._id === productId).length > 0) {
-            //console.log('error', orderArray);
-            product.qty++;
-            product.total = 0;
-            setOrderArray((prevState) => [...prevState, product]);
-            const orderList = [...new Set(orderArray)];
-            return setOrderArray(orderList);
-          } else {
-            product.qty = 1;
-            product.total = 0;
-            return setOrderArray((prevState) => [...prevState, product]);
-          }
-        case "plusOne": {
-          product.qty++;
-          product.total = 0;
-          setOrderArray((prevState) => [...prevState, product]);
-          const orderList = [...new Set(orderArray)];
-          return setOrderArray(orderList);
-        }
-        case "minusOne": {
-          product.qty--;
-          product.total = 0;
-          setOrderArray((prevState) => [...prevState, product]);
-          const orderList = [...new Set(orderArray)];
-          return setOrderArray(orderList);
-=======
                     if (orderArray.filter(el => el._id === productId).length > 0) {
                         product.qty++;
                         product.total=0;
@@ -157,15 +106,22 @@ const Home = () => {
                         const orderList = [...new Set(orderArray)]; 
                         return setOrderArray(orderList); }       
                 case ("minusOne"): 
-                        {product.qty--;
-                        product.total=0;
-                        setOrderArray(prevState => [...prevState, product]);
-                        const orderList = [...new Set(orderArray)]; 
-                        return setOrderArray(orderList);}
+                    {
+                        product.qty--;
+                        product.total = 0;
+                        if(product.qty > 0){
+                            setOrderArray(prevState => [...prevState, product]);
+                            const orderList = [...new Set(orderArray)]; 
+                            return setOrderArray(orderList)
+                        }else{
+                            alert('No puede ser negativo...');
+                            product.qty = 0;
+                            //return setOrderArray(orderList)
+                        }
+                    }
                 case ("deleteProduct"):
                         return setOrderArray(deleteProduct(orderArray, productId));
             }
->>>>>>> 557c722259f5e9eeba64ed1d1e41852fcf43f1e8
         }
     }
 
@@ -178,17 +134,19 @@ const Home = () => {
                             text="DESAYUNOS"
                             id="breakfast"
                             name="breakfast"
-                            filterProductsByType={filterProductsByType} />
+                            filterProductsByType={filterProductsByType}
+                            paramIcon="fas fa-coffee" />
                     <Menu
                             text="ALMUERZOS"
                             id='lunch'
                             name='lunch'
-                            filterProductsByType={filterProductsByType} /> 
+                            filterProductsByType={filterProductsByType}
+                            paramIcon="fas fa-hamburger"/> 
 
 {/* Render list of products by type */}
                     <div className="products-list" /* onClick={ (e) => handleProduct(e.target.id) } */> 
                         {productData.map(product => {
-                            console.log(product._id)
+                            //console.log("render")
                             return <Products 
                                         key={product._id}
                                         props={{
@@ -209,17 +167,6 @@ const Home = () => {
                         <div className="order-info">
                             <div className="row">
                                 <Label text="Mi orden" />
-                            </div>
-
-                            <div className="row">
-                                <Label text="Mesero:" />
-                                <Input attribute={{
-                                    id: 'waiter',
-                                    name: 'waiter',
-                                    type: 'text',
-                                    placeholder: 'Mesero',
-                                }} 
-                                handleInput={handleInput}/>
                             </div>
                             
                             <div className="row">
@@ -247,7 +194,7 @@ const Home = () => {
         
                         </div>
 {/* Render order */}
-                        <div className="order-produc ts">
+                        <div className="order-products">
                             <div onClick={ (e) => handleProduct(e.target.parentNode.id, e.target.className) }>
                                 {orderArray.map(el => { 
                                     el.total = el.price*el.qty;

@@ -1,0 +1,52 @@
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card {
+    width: 200px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #E7E7E8;
+    border: 1px solid #1a1a1a;
+    color: #1a1a1a;
+    margin: 0 0 10px 0;
+    max-height: 400px;
+    overflow-y: overlay;
+}
+
+.card-title {
+    width: 100%;
+}
+
+.chip-estado {
+    background-color: #D48000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 30px;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.product {
+    width: 70%;
+}
+
+.count {
+    width: 30%;
+    text-align: center;
+}
+
+.btn-send {
+    background-color: #EC1010;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    padding: 5px;
+    color: #fff;
+    font-size: 18px;
+}

@@ -7,7 +7,7 @@ export const createOrder = ( token, body) => {
         body: {body}
     };
 /* 192.168.1.116: */
-    fetch('http://192.168.1.116:5000/orders', options)
+    fetch('http://localhost:5000/orders', options)
     .then((resp) => {
         if (resp.status === 200){
             return resp.json();
