@@ -1,13 +1,11 @@
 import './App.css';
 
-import Route from './router/Routes.js';
-
+import Route from './Router/Routes.js';
 
 function App() {
   return (
     <div className="App">
       <Route />
-
     </div>
   );
 }

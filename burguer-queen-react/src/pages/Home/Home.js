@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useState} from 'react';
 import '../Home/Home.css';
 import Label from './components/Label/Label';
 import Input from './components/Input/Input';
-import Nav from '../commons/Nav/Nav';
+import Nav from '../commons/Nav/Nav.js';
 import Menu from './components/Menu/Menu';
 import Products from './components/Products/Products';
 import OrderList from './components/OrderList/OrderList';
 import getAllProducts from '../../controller/products.js'
 import {createOrder } from '../../controller/orders.js';
-import deleteProduct from '../../utils/products';
+import deleteProduct from '../../utils/products.js';
 /* import Draggable, {DraggableCore} from 'react-draggable'; */
 
 const Home = () => {
@@ -104,13 +104,20 @@ const Home = () => {
                         product.total=0;
                         setOrderArray(prevState => [...prevState, product]);
                         const orderList = [...new Set(orderArray)]; 
-                        return setOrderArray(orderList); }       
-                case ("minusOne"): 
-                        {product.qty--;
-                        product.total = 0;
-                        setOrderArray(prevState => [...prevState, product]);
-                        const orderList = [...new Set(orderArray)]; 
-                        return setOrderArray(orderList);}
+                        return setOrderArray(orderList); }    
+                 case ("minusOne"): 
+                            product.qty--;
+                            product.total = 0;
+                            if(product.qty > 0){
+                                setOrderArray(prevState => [...prevState, product]);
+                                const orderList = [...new Set(orderArray)]; 
+                                return setOrderArray(orderList)
+                            }else{
+                                alert('No puede ser negativo...');
+                                product.qty = 0;
+                                //return setOrderArray(orderList)
+                            }
+                        break
                 case ("deleteProduct"):
                         return setOrderArray(deleteProduct(orderArray, productId));
             }
@@ -127,7 +134,7 @@ const Home = () => {
                             id="breakfast"
                             name="breakfast"
                             filterProductsByType={filterProductsByType}
-                            paramIcom="fas fa-lunch" />
+                            paramIcon="fas fa-coffee"/>
                     <Menu
                             text="ALMUERZOS"
                             id='lunch'

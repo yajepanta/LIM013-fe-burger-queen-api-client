@@ -7,7 +7,7 @@ const OrderList = ({product, total}) => {
     return (
         <li className="order-list" id={product._id}> 
 
-            <span>{product.name}</span> 
+            <span className="span-product">{product.name}</span> 
             <button className="minusOne">--</button>
             <span>{product.qty}</span> 
             <button className="plusOne">+</button> 

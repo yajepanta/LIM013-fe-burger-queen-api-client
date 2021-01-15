@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../../../assets/images/logo.svg';
+import logo from '../../../assets/images/logo.svg';
 
 
 import Cookies from 'universal-cookie';
@@ -16,23 +16,22 @@ const logOut = () => {
 }
 
 const Nav = () => {
-
     return (
         <div>
             <nav>
                 <img src={logo} alt="logo"></img>
                 <div className='options flex-row'>
-                    <button className="btn-logout">
-                        <i className="fas fa-sign-out-alt"></i> ?
+                    <button className="btn-nav" onClick={()=>{window.location.href='home'}}>
+                        <i class="fas fa-home"></i> Inicio
                     </button>
-                    <button className="btn-logout">
-                        <i className="fas fa-sign-out-alt"></i> PENDIENTES
+                    <button className="btn-nav" onClick={()=>{window.location.href='pending'}}>
+                    <i class="fas fa-hamburger"></i> Pendientes
                     </button>
-                    <button className="btn-logout">
-                        <i className="fas fa-sign-out-alt"></i> LISTOS
+                    <button className="btn-nav" onClick={()=>{window.location.href='delivering'}}>
+                    <i class="fas fa-concierge-bell"></i> Listos
                     </button>
-                    <button className="btn-logout" onClick={logOut}>
-                        <i className="fas fa-sign-out-alt"></i> CERRAR SESIÓN
+                    <button className="btn-nav" onClick={logOut}>
+                        <i className="fas fa-sign-out-alt"></i> Cerrar sesión
                     </button>          
                 </div>      
             </nav>
