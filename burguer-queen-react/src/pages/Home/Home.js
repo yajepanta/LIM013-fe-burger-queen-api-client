@@ -7,7 +7,7 @@ import Menu from './components/Menu/Menu';
 import Products from './components/Products/Products';
 import OrderList from './components/OrderList/OrderList';
 import getAllProducts from '../../controller/products.js'
-import {createOrder } from '../../controller/orders.js';
+import { createOrder } from '../../controller/orders.js';
 import deleteProduct from '../../utils/products';
 /* import Draggable, {DraggableCore} from 'react-draggable'; */
 

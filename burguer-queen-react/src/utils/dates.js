@@ -33,3 +33,5 @@ const calculateDate = (dateEntry, dateProcessed) => {
 
     return restaHoras + ':' + restaMinutos;
 }
+
+export default calculateDate;

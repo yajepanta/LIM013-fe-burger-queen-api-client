@@ -1,8 +1,8 @@
 import '../components/Card.css';
 
-const Card = () => {
+const Card = ({props}) => {
+    //console.log('props', props);
     return(
-
         <div className='card'>
             <div className='card-title flex'>
                 <span>N° 001</span>
@@ -14,18 +14,12 @@ const Card = () => {
                     <span className='product bold'>PRODUCTO</span>
                     <span className='bold'>CANTIDAD</span>
                 </div>
-                <div className='row flex'>
-                    <span className='product'>Hamburguesa de queso</span>
-                    <span className='count'>2</span>
-                </div>
-                <div className='row flex'>
-                    <span className='product'>Papas fritas</span>
-                    <span className='count'>1</span>
-                </div>
+               
+                {props.products.map(product => <li className='row flex'><span className='product'>{product.product.name}</span><span className='qty'>{product.qty}</span></li>)}
+                
                 <button className='btn-send'>Enviar</button>
             </div>
         </div>
-        
     )
 }
 
