@@ -161,6 +161,28 @@ const ChefPending = ()  => {
                 "type": "breakfast",
                 "dateEntry": "01/01/2020 15:00:00"
               }
+            },
+            {
+                "qty": 2,
+                "product": {
+                    "_id":4,
+                   "name":"Hamburguesa simple",
+                   "price":"10.00",
+                   "image":"https://image.freepik.com/foto-gratis/vista-lateral-hamburguesa-carne-res-queso-derretido-verduras-sobre-tabla-madera_140725-11865.jpg",
+                   "type": "lunch",
+                   "dateEntry": null
+                },
+            },
+            {
+                "qty": 2,
+                "product": {
+                    "_id":5,
+                   "name":"Papas fritas",
+                   "price":"5.00",
+                   "image":"https://image.freepik.com/foto-gratis/papas-fritas_144627-12398.jpg",
+                   "type": "lunch",
+                   "dateEntry": null
+                }
             }
           ],
           "status": "delivering",
@@ -176,7 +198,7 @@ const ChefPending = ()  => {
                 {/* <span>{calculateDate(dateEntry, dateProcessed)}</span> */}
                 {   
                     arrayOrders.map( order => {
-                        console.log('order', order);
+                        //console.log('order', order);
                         return <Card 
                             key = {order._id}
                             props = {{
