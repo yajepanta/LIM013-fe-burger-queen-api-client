@@ -7,28 +7,24 @@ import Card from '../../pages/commons/Card/components/Card.js';
 import calculateDate from '../../utils/dates.js';
 import { getAllOrders } from '../../controller/orders.js';
 
-const dateEntry = new Date('Sat Jan 16 2021 22:46:57 GMT-0500');
+const dateEntry = new Date('Sat Jan 18 2021 08:46:57 GMT-0500');
 const dateProcessed = new Date();
+
+console.log(calculateDate(dateEntry, dateProcessed));
 
 const ChefPending = ()  => {
 
-    //const [ arrayOrders , setArrayOrders ] = useState();
+    const [ arrayOrders , setArrayOrders ] = useState([]);
 
-    /* useEffect(() => {
-        /* async function getData(url) {
-            const response = await fetch(url);
-            const result = await response.json();
-            setArrayOrders(result);
-        }
-
-        getData('http://localhost:5000/orders') 
+    useEffect(() => {
+    
         getAllOrders()
             .then(data => { return setArrayOrders(data) })
             .catch(err => console.log(err))
 
-    }, []) */
+    }, []) 
 
-    const arrayOrders = [
+    /* const arrayOrders = [
         {
           "_id": "1",
           "userId": "userId",
@@ -189,7 +185,12 @@ const ChefPending = ()  => {
           "dateEntry": "01/01/2020 15:00:00",
           "dateProcessed": "01/01/2020 15:00:00"
         }
-      ]
+      ] */
+    
+    
+    const arrayPending  = arrayOrders.filter((el) => {return el.status == 'pending'})
+
+    console.log('data', arrayPending);
 
     return (
         <div>
@@ -197,10 +198,11 @@ const ChefPending = ()  => {
             <div className='card-container'>
                 {/* <span>{calculateDate(dateEntry, dateProcessed)}</span> */}
                 {   
-                    arrayOrders.map( order => {
+                    arrayPending.map( order => {
                         //console.log('order', order);
                         return <Card 
                             key = {order._id}
+                            status = {order.status}
                             props = {{
                                 "products": order.products
                             }}

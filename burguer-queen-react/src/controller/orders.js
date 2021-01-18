@@ -18,5 +18,6 @@ export const createOrder = ( token, body) => {
 export const getAllOrders = () => {
     return fetch('http://localhost:5000/orders')
         .then((resp) => { return resp.json() })
+        .then((data) => { console.log('datacontroller', data); return data})
         .catch(err => console.log('err', err))
 }

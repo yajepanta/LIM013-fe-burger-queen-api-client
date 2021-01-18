@@ -9,6 +9,8 @@ const cookies = new Cookies();
 
 const routes = (e) => {
     switch(e.target.name){
+        case ("home"): window.location.href = './home';
+        break;
         case ("pending"): window.location.href = './chefPending';
         break;
         case ("delivering"): window.location.href = './chefDelivering';
@@ -32,6 +34,9 @@ const Nav = () => {
             <nav>
                 <img src={logo} alt="logo"></img>
                 <div className='options flex-row'>
+                    <button className="btn-logout" name ="home" onClick={routes}>
+                        <i className="fas fa-sign-out-alt"></i> PEDIDOS
+                    </button>
                     <button className="btn-logout" name ="pending" onClick={routes}>
                         <i className="fas fa-sign-out-alt"></i> PENDING
                     </button>

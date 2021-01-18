@@ -1,11 +1,12 @@
 import '../components/Card.css';
 
-const Card = ({props}) => {
+const Card = ({status, props}) => {
+    console.log('props.products', props.products);
     return(
         <div className='card'>
             <div className='card-title flex'>
                 <span>N°001</span>
-                <span className='chip-estado'>Pendiente</span>
+                <span className='chip-estado'>{status}</span>
             </div>
             <hr></hr>
             <div className='card-body'>
