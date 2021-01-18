@@ -2,7 +2,6 @@ const calculateDate = (dateEntry, dateProcessed) => {
 
     /* let minutosPedido = parseInt(datePedido.substr(13,2))
     let horasPedido = parseInt(datePedido.substr(10,2))
-
     let minutosEntrega = parseInt(dateEntrega.substr(13,2))
     let horasEntrega = parseInt(dateEntrega.substr(10,2))
     */
@@ -33,3 +32,5 @@ const calculateDate = (dateEntry, dateProcessed) => {
 
     return restaHoras + ':' + restaMinutos;
 }
+
+export default calculateDate;

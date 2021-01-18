@@ -6,11 +6,7 @@ export const createOrder = ( token, body) => {
         },
         body: {body}
     };
-<<<<<<< HEAD
 /* 192.168.1.116: */
-=======
-
->>>>>>> 62cd84a41de752e9683354761d83b881b3127715
     fetch('http://localhost:5000/orders', options)
     .then((resp) => {
         if (resp.status === 200){
@@ -19,6 +15,9 @@ export const createOrder = ( token, body) => {
     .catch(err=>console.log('err', err));
 };
 
-export const allOrders = () => {
-    console.log('orders');
+export const getAllOrders = () => {
+    return fetch('http://localhost:5000/orders')
+        .then((resp) => { return resp.json() })
+        .then((data) => { console.log('datacontroller', data); return data})
+        .catch(err => console.log('err', err))
 }

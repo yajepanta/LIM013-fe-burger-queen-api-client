@@ -1,9 +1,5 @@
 import React from 'react';
 import logo from '../../../assets/images/logo.svg';
-<<<<<<< HEAD:burguer-queen-react/src/pages/commons/Nav/Nav.jsx
-=======
-
->>>>>>> 62cd84a41de752e9683354761d83b881b3127715:burguer-queen-react/src/pages/commons/Nav/Nav.js
 
 import Cookies from 'universal-cookie';
 
