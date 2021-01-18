@@ -7,9 +7,6 @@ import Card from '../../pages/commons/Card/components/Card.js';
 import calculateDate from '../../utils/dates.js';
 import { getAllOrders } from '../../controller/orders.js';
 
-const dateEntry = new Date('Sat Jan 16 2021 22:46:57 GMT-0500');
-const dateProcessed = new Date();
-
 const ChefDelivering = ()  => {
 
     const [ arrayOrders , setArrayOrders ] = useState([]);
@@ -23,13 +20,13 @@ const ChefDelivering = ()  => {
         getData('http://localhost:5000/orders')  */
 
         getAllOrders()
-            .then(data => { console.log('data1', data); return setArrayOrders(data) })
+            .then(data => { return setArrayOrders(data) })
             .catch(err => console.log(err)) 
     }, []) 
 
-    console.log('data', arrayOrders);
+    //console.log('data', arrayOrders);
 
-    const arrayDelivering = arrayOrders.filter((el) => {return el.status == 'delivering'})
+    const arrayDelivering = arrayOrders.filter((el) => {return el.status === 'delivering'})
 
     return (
         <div>
@@ -38,10 +35,11 @@ const ChefDelivering = ()  => {
                 {/* <span>{calculateDate(dateEntry, dateProcessed)}</span> */}
                 {  
                     arrayDelivering.map( order => {
-                        //console.log('order', order);
+                        //console.log('tiempo',calculateDate(new Date(order.dateEntry), new Date(order.dateProcessed)));
                         return <Card 
                             key = {order._id}
                             status = {order.status}
+                            calculateDate = {calculateDate(new Date(order.dateEntry), new Date(order.dateProcessed))}
                             props = {{
                                 "products": order.products
                             }}

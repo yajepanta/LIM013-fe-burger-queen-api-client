@@ -30,6 +30,10 @@
     border-radius: 30px;
 }
 
+.green {
+    background-color: #5E9732;
+}
+
 .bold {
     font-weight: 600;
 }

@@ -15,35 +15,39 @@ const Home = () => {
 
     /* productData es un array que contiene objetos (cada producto), por eso se le puede hacer map */
     const [orderArray, setOrderArray] = useState([]);
-    const [productData, setProductData] = useState(["breakfast"]);
     const [client, setClient] = useState();
    /*  const [numberTable, setNumberTable] = useState(); */
     
     /* acá pasar el estado (objeto) como parámetro  */
     const [allProducts, setAllProducts] = useState([]);
+
+    const returnCat = () => {
+        const time = new Date().getHours();
+        if (time < 15) {
+            return 'breakfast'
+        }
+        else {
+            return 'lunch'
+        }
+    }
+
+    /*guardando el estado de la cat seleccionada* */
+    const [catSelected, setCatSelected] = useState(returnCat());
     
     useEffect(()=>{
         getAllProducts()
-        .then(resp => {return setAllProducts(resp)})
+        .then(resp => { console.log('res', resp); return setAllProducts(resp)})
         .catch(err => console.log(err));
     }, []);
 
     let totalPrice = [0];
     
-    const filterProductsByType = useCallback((name) => {
+    const filterProductsByType = (name) => {
+        /* console.log('datafilter', allProducts);
         const productsByType = allProducts.filter(el => el.type===name);
-        return setProductData(productsByType);
-    }, [allProducts]);
-
-    useEffect(()=>{
-        const time = new Date().getHours();
-        if (time < 15) {
-            filterProductsByType("breakfast");
-        }
-        else {
-            filterProductsByType("lunch");
-        }
-    }, [filterProductsByType]);
+        return setProductData(productsByType); */
+        setCatSelected(name);
+    };
 
     const sendOrder = () => {
     /* createOrder recibe null porque falta el id de usuario*/
@@ -72,8 +76,7 @@ const Home = () => {
        
         if (productId > 0){ 
             /* objeto con los datos del producto a ingresar */
-            const product = productData.find((el)=> {return el._id === productId;});   
-            
+            const product = allProducts.find((el)=> {return el._id === productId});   
             
             switch (targetClassName) {
                 default:
@@ -144,17 +147,21 @@ const Home = () => {
 
 {/* Render list of products by type */}
                     <div className="products-list" /* onClick={ (e) => handleProduct(e.target.id) } */> 
-                        {productData.map(product => {
-                            console.log("render")
-                            return <Products 
-                                        key={product._id}
-                                        props={{
-                                            "id": product._id,
-                                            "name":product.name, 
-                                            "price": product.price
-                                        }} 
-                                        handleProduct={handleProduct}/>
-                        })}
+                        {
+                            allProducts.length > 0 &&
+                            allProducts.filter(el => el.type===catSelected).map(product => {
+                                //console.log("render")
+                                return <Products 
+                                            key={product._id}
+                                            props={{
+                                                "id": product._id,
+                                                "name":product.name, 
+                                                "price": product.price
+                                            }} 
+                                            handleProduct={handleProduct}/>
+                            })
+                        }
+
                     </div>
                     
                             

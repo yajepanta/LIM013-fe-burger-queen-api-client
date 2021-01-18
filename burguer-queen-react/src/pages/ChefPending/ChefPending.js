@@ -4,13 +4,7 @@ import '../ChefPending/ChefPending.css';
 import Nav from '../commons/Nav/Nav.js';
 import Card from '../../pages/commons/Card/components/Card.js';
 
-import calculateDate from '../../utils/dates.js';
-import { getAllOrders } from '../../controller/orders.js';
-
-const dateEntry = new Date('Sat Jan 18 2021 08:46:57 GMT-0500');
-const dateProcessed = new Date();
-
-console.log(calculateDate(dateEntry, dateProcessed));
+import { getAllOrders,  updateOrders } from '../../controller/orders.js';
 
 const ChefPending = ()  => {
 
@@ -24,28 +18,51 @@ const ChefPending = ()  => {
 
     }, []) 
     
-    const arrayPending  = arrayOrders.filter((el) => {return el.status == 'pending'})
+    const arrayPending  = arrayOrders.filter((el) => {return el.status === 'pending'})
 
-    console.log('data', arrayPending);
+    //console.log('data', arrayPending);
+
+    const modifyOrder = (idOrden) => {
+        /* createOrder recibe null porque falta el id de usuario*/
+        /* if orderArray.lenght = 0 no se hace la peticion */
+        //const products = arrayOrders.map(el=> {return ({ productId: el._id, qty: el.qty,})})
+
+        console.log('id', idOrden);
+        const uniqueOrder = arrayOrders.find(el => {return el._id == idOrden})
+
+        console.log('uniqueOrder', uniqueOrder);
+        
+        const body = {
+            /* userId: uniqueOrder.userId,
+            client: uniqueOrder.client,
+            products: uniqueOrder.products,  */
+            status: 'delivering',
+        };
+        
+        return updateOrders(body);
+    };
+
+    modifyOrder('01')
 
     return (
         <div>
             <Nav className="nav-bar"/>
             <div className='card-container'>
-                {/* <span>{calculateDate(dateEntry, dateProcessed)}</span> */}
                 {   
                     arrayPending.map( order => {
                         //console.log('order', order);
+                        //console.log('tiempo',calculateDate(new Date(order.dateEntry), new Date(order.dateProcessed)));
                         return <Card 
                             key = {order._id}
                             status = {order.status}
+                            calculateDate = ''
                             props = {{
+                                "_id": order._id,
                                 "products": order.products
                             }}
                             />
                     })
                 }
-                
             </div>
         </div>
         
