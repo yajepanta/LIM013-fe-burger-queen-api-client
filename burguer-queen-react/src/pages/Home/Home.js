@@ -17,7 +17,7 @@ const Home = () => {
     const [orderArray, setOrderArray] = useState([]);
     const [productData, setProductData] = useState(["breakfast"]);
     const [client, setClient] = useState();
-    const [numberTable, setNumberTable] = useState();
+   /*  const [numberTable, setNumberTable] = useState(); */
     
     /* acá pasar el estado (objeto) como parámetro  */
     const [allProducts, setAllProducts] = useState([]);
@@ -62,8 +62,8 @@ const Home = () => {
             break;
             case 'client': setClient(value);
             break;
-            case 'numberTable': setNumberTable(value);
-            break;
+            /* case 'numberTable': setNumberTable(value);
+            break; */
         }
     }
 

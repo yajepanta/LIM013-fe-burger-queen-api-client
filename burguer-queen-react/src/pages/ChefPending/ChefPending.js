@@ -29,8 +29,7 @@ const ChefPending = () => {
     return (
         <div>
             <Nav />
-            ChefPending
-            
+            ChefPending           
         </div>
     );
 }
