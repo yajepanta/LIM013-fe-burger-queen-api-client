@@ -1,0 +1,30 @@
+nav{
+    background-color: #EE3124;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav > img {
+    height: 40px;
+    padding: 2vh;
+}
+
+.btn-nav {
+    color: #ffffff;
+    font-size: 15px;
+    background-color: #EE3124;
+    border: 1px solid #fff;
+    outline: none;
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.flex-row {
+    display: flex;
+}
