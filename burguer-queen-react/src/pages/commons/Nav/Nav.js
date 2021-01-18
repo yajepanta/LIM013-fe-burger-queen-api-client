@@ -20,13 +20,13 @@ const Nav = () => {
                 <img src={logo} alt="logo"></img>
                 <div className='options flex-row'>
                     <button className="btn-nav" onClick={()=>{window.location.href='home'}}>
-                        <i class="fas fa-home"></i> Inicio
+                        <i className="fas fa-home"></i> Inicio
                     </button>
                     <button className="btn-nav" onClick={()=>{window.location.href='pending'}}>
-                    <i class="fas fa-hamburger"></i> Pendientes
+                    <i className="fas fa-hamburger"></i> Pendientes
                     </button>
                     <button className="btn-nav" onClick={()=>{window.location.href='delivering'}}>
-                    <i class="fas fa-concierge-bell"></i> Listos
+                    <i className="fas fa-concierge-bell"></i> Listos
                     </button>
                     <button className="btn-nav" onClick={logOut}>
                         <i className="fas fa-sign-out-alt"></i> Cerrar sesión

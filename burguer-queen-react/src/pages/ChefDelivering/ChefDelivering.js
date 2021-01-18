@@ -7,8 +7,8 @@ import Card from '../../pages/commons/Card/components/Card.js';
 import calculateDate from '../../utils/dates.js';
 import { getAllOrders } from '../../controller/orders.js';
 
-const dateEntry = new Date('Sat Jan 16 2021 22:46:57 GMT-0500');
-const dateProcessed = new Date();
+/* const dateEntry = new Date('Sat Jan 16 2021 22:46:57 GMT-0500');
+const dateProcessed = new Date(); */
 
 const ChefDelivering = ()  => {
 
@@ -29,7 +29,7 @@ const ChefDelivering = ()  => {
 
     console.log('data', arrayOrders);
 
-    const arrayDelivering = arrayOrders.filter((el) => {return el.status == 'delivering'})
+    const arrayDelivering = arrayOrders.filter((el) => {return el.status === 'delivering'})
 
     return (
         <div>
@@ -42,6 +42,7 @@ const ChefDelivering = ()  => {
                         return <Card 
                             key = {order._id}
                             status = {order.status}
+                            calculateDate = {calculateDate(new Date(order.dateEntry), new Date(order.dateProcessed))}
                             props = {{
                                 "products": order.products
                             }}
