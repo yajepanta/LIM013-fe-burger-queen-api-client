@@ -43,6 +43,7 @@ const ChefDelivering = ()  => {
                             props = {{
                                 "products": order.products
                             }}
+                            modifyOrder = ''
                             />
                     })
                 } 

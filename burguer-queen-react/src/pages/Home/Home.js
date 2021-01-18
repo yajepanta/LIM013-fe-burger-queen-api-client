@@ -201,13 +201,13 @@ const Home = () => {
                         </div>
 {/* Render order */}
                         <div className="order-products">
-                            <div onClick={ (e) => handleProduct(e.target.parentNode.id, e.target.className) }>
+                            <div onClick={ (e) => handleProduct(e.target.id, e.target.className) }>
                                 {orderArray.map(el => { 
                                     el.total = el.price*el.qty;
                                     totalPrice.push(el.total);
                                     return <OrderList key={el._id} product={el} total={el.total} />})}
                             </div>
-                            <Label className="order-total" text={`Total: s/${totalPrice.reduce((a , b)=>{return a + b})}`}></Label>
+                            <Label className="order-total" text={`Total: S/.${totalPrice.reduce((a , b)=>{return a + b})}`}></Label>
                             {/* <label>Total: {total.reduce((a , b)=>{return a + b})}</label> */}
                             <button className="send-order" onClick={sendOrder}> Enviar a cocina</button>
                         </div>

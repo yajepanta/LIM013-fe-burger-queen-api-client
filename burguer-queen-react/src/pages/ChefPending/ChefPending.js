@@ -27,22 +27,28 @@ const ChefPending = ()  => {
         /* if orderArray.lenght = 0 no se hace la peticion */
         //const products = arrayOrders.map(el=> {return ({ productId: el._id, qty: el.qty,})})
 
-        console.log('id', idOrden);
-        const uniqueOrder = arrayOrders.find(el => {return el._id == idOrden})
+        //console.log('id', idOrden);
+        const uniqueOrder = arrayPending.filter(el => { return el._id === idOrden})
 
-        console.log('uniqueOrder', uniqueOrder);
+        //console.log('uniqueOrder', uniqueOrder);
         
-        const body = {
-            /* userId: uniqueOrder.userId,
-            client: uniqueOrder.client,
-            products: uniqueOrder.products,  */
-            status: 'delivering',
-        };
+        let body = {}
+
+        uniqueOrder.map(el => {
+            return body = {
+                userId: el.userId,
+                client: el.client,
+                products: el.products, 
+                status: 'delivering',
+            };
+        })
         
+        console.log('Se supone que se debe eliminar...');
+        const updateData = arrayPending.filter(el => {return el._id !== idOrden})
+        setArrayOrders(updateData)
+        //console.log('arrayPending', arrayOrders);
         return updateOrders(body);
     };
-
-    modifyOrder('01')
 
     return (
         <div>
@@ -60,6 +66,7 @@ const ChefPending = ()  => {
                                 "_id": order._id,
                                 "products": order.products
                             }}
+                            modifyOrder = {modifyOrder}
                             />
                     })
                 }
