@@ -192,7 +192,7 @@ const ChefPending = ()  => {
 
     console.log('data', arrayPending);
 
-    return (
+   return (
         <div>
             <Nav className="nav-bar"/>
             <div className='card-container'>
