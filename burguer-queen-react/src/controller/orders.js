@@ -15,6 +15,7 @@ export const createOrder = ( token, body) => {
     .catch(err=>console.log('err', err));
 };
 
+/**Traer todas las ordenes */
 export const getAllOrders = () => {
     return fetch('http://localhost:5000/orders')
         .then((resp) => { return resp.json() })
