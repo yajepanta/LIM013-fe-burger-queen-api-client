@@ -5,17 +5,9 @@
     background: #FFFFFF;
     border-radius: 50px;
     font-size: 20px;
-    color: grey;
+    color: #010101;
     border: none;
     outline: none;
-}
-
-.input-login::placeholder {
-    line-height: 47px;
-    color: grey;
-    text-align: center;
-    vertical-align: auto;
-
 }
 
 .input-error {
