@@ -11,7 +11,6 @@ const ChefPending = ()  => {
     const [ arrayOrders , setArrayOrders ] = useState([]);
 
     useEffect(() => {
-    
         getAllOrders()
             .then(data => { return setArrayOrders(data) })
             .catch(err => console.log(err))
