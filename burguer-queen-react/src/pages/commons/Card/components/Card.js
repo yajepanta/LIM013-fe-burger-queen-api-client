@@ -1,7 +1,7 @@
 import '../components/Card.css';
 
 //console.log('tiempo',calculateDate(new Date(order.dateEntry), new Date(order.dateProcessed)));
-const Card = ({status, calculateDate, props}) => {
+const Card = ({status, calculateDate, props, modifyOrder}) => {
 
     return(
         <div className='card'>
@@ -19,8 +19,8 @@ const Card = ({status, calculateDate, props}) => {
                
                 {props.products.map(product => <li className='row flex'><span className='product'> • {product.name}</span><span className='qty'>{product.qty}</span></li>)} 
                 
-                <button className='btn-send'>Enviar</button>
             </div>
+            <button className='btn-send' onClick = {(e) => modifyOrder(props._id)}>Enviar</button>
         </div>
     )
 }

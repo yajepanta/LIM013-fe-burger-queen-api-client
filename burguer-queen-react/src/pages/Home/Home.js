@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
+import { trackPromise} from 'react-promise-tracker'; /* TRACK PROMISE */
 import '../Home/Home.css';
 import Label from './components/Label/Label';
 import Input from './components/Input/Input';
@@ -9,6 +10,7 @@ import OrderList from './components/OrderList/OrderList';
 import getAllProducts from '../../controller/products.js'
 import {createOrder } from '../../controller/orders.js';
 import deleteProduct from '../../utils/products.js';
+import Cookies from 'universal-cookie';
 /* import Draggable, {DraggableCore} from 'react-draggable'; */
 
 const Home = () => {
@@ -33,11 +35,12 @@ const Home = () => {
 
     /*guardando el estado de la cat seleccionada* */
     const [catSelected, setCatSelected] = useState(returnCat());
-    
+    /* TRACK PROMISE */
     useEffect(()=>{
-        getAllProducts()
-        .then(resp => { console.log('res', resp); return setAllProducts(resp)})
-        .catch(err => console.log(err));
+        /* console.log(window.Cookies.get("cookieSession")); */
+        trackPromise(getAllProducts()
+        .then(resp => { console.log('trackpromise'); return setAllProducts(resp)})
+        .catch(err => console.log(err)));
     }, []);
 
     let totalPrice = [0];
@@ -200,13 +203,13 @@ const Home = () => {
                         </div>
 {/* Render order */}
                         <div className="order-products">
-                            <div onClick={ (e) => handleProduct(e.target.parentNode.id, e.target.className) }>
+                            <div onClick={ (e) => handleProduct(e.target.id, e.target.className) }>
                                 {orderArray.map(el => { 
                                     el.total = el.price*el.qty;
                                     totalPrice.push(el.total);
                                     return <OrderList key={el._id} product={el} total={el.total} />})}
                             </div>
-                            <Label className="order-total" text={`Total: s/${totalPrice.reduce((a , b)=>{return a + b})}`}></Label>
+                            <Label className="order-total" text={`Total: S/.${totalPrice.reduce((a , b)=>{return a + b})}`}></Label>
                             {/* <label>Total: {total.reduce((a , b)=>{return a + b})}</label> */}
                             <button className="send-order" onClick={sendOrder}> Enviar a cocina</button>
                         </div>
