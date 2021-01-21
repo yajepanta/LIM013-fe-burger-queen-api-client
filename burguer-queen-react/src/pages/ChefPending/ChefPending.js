@@ -1,219 +1,87 @@
-import { useEffect, useState } from 'react';
-import '../ChefPending/ChefPending.css';
+import { useEffect, useState } from "react";
+import "../ChefPending/ChefPending.css";
 
-import Nav from '../commons/Nav/Nav';
-import Card from '../../pages/commons/Card/components/Card.js';
+import Nav from "../commons/Nav/Nav.js";
+import Card from "../../pages/commons/Card/components/Card.js";
 
-import calculateDate from '../../utils/dates.js';
-import { getAllOrders } from '../../controller/orders.js';
+import { getAllOrders, updateOrders } from "../../controller/orders.js";
 
-const dateEntry = new Date('Sat Jan 18 2021 08:46:57 GMT-0500');
-const dateProcessed = new Date();
+const ChefPending = () => {
+  const [arrayOrders, setArrayOrders] = useState([]);
 
-console.log(calculateDate(dateEntry, dateProcessed));
+  useEffect(() => {
+    getAllOrders()
+      .then((data) => {
+        return setArrayOrders(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-const ChefPending = ()  => {
+  const sortedActivities = arrayOrders.sort(
+    (a, b) => b.dateEntry - a.dateEntry
+  );
+  console.log("sortTime", sortedActivities);
+  const arrayPending = arrayOrders.filter((el) => {
+    return el.status === "pending";
+  });
 
-    const [ arrayOrders , setArrayOrders ] = useState([]);
+  //console.log('data', arrayPending);
 
-    useEffect(() => {
-    
-        getAllOrders()
-            .then(data => { return setArrayOrders(data) })
-            .catch(err => console.log(err))
+  const modifyOrder = (idOrden) => {
+    /* createOrder recibe null porque falta el id de usuario*/
+    /* if orderArray.lenght = 0 no se hace la peticion */
+    //const products = arrayOrders.map(el=> {return ({ productId: el._id, qty: el.qty,})})
 
-    }, []) 
+    //console.log('id', idOrden);
+    const uniqueOrder = arrayPending.filter((el) => {
+      return el._id === idOrden;
+    });
 
-    /* const arrayOrders = [
-        {
-          "_id": "1",
-          "userId": "userId",
-          "client": "client",
-          "products": [
-            {
-              "qty": 2,
-              "product": {
-                "_id": 1,
-                "name": "Café americano",
-                "price": "5.00",
-                "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
-                "type": "breakfast",
-                "dateEntry": "01/01/2020 15:00:00"
-              }
-            },
-            {
-              "qty": 5,
-              "product": {
-                "_id": 3,
-                "name": "Sandwich de jamón y queso",
-                "price": "10.00",
-                "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
-                "type": "breakfast",
-                "dateEntry": null
-              }
-            }
-          ],
-          "status": "pending",
-          "dateEntry": "01/01/2020 15:00:00",
-          "dateProcessed": "01/01/2020 15:00:00"
-        },
-        {
-          "_id": "2",
-          "userId": "userId",
-          "client": "client",
-          "products": [
-            {
-              "qty": 1,
-              "product": {
-                "_id": 3,
-                "name": "Sándwich de jamón y queso",
-                "price": "10.00",
-                "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
-                "type": "breakfast",
-                "dateEntry": "01/01/2020 15:00:00"
-              }
-            }
-          ],
-          "status": "pending",
-          "dateEntry": "01/01/2020 15:00:00",
-          "dateProcessed": "01/01/2020 15:00:00"
-        },
-        {
-          "_id": "3",
-          "userId": "userId",
-          "client": "client",
-          "products": [
-            {
-              "qty": 1,
-              "product": {
-                "_id": 1,
-                "name": "Café americano",
-                "price": "5.00",
-                "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
-                "type": "breakfast",
-                "dateEntry": "01/01/2020 15:00:00"
-              }
-            },
-            {
-                "qty": 5,
-                "product": {
-                  "_id": 9,
-                  "name": "Jugo",
-                  "price": "5.00",
-                  "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
-                  "type": "breakfast",
-                  "dateEntry": "01/01/2020 11:00:00"
-                }
-            },
-            {
-                "qty": 2,
-                "product": {
-                  "_id": 12,
-                  "name": "Agua",
-                  "price": "5.00",
-                  "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
-                  "type": "breakfast",
-                  "dateEntry": "01/01/2020 15:00:00"
-                }
-            }
-          ],
-          "status": "pending",
-          "dateEntry": "01/01/2020 15:00:00",
-          "dateProcessed": "01/01/2020 15:00:00"
-        },
-        {
-          "_id": "4",
-          "userId": "userId",
-          "client": "client",
-          "products": [
-            {
-              "qty": 5,
-              "product": {
-                "_id": 9,
-                "name": "Jugo",
-                "price": "5.00",
-                "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
-                "type": "breakfast",
-                "dateEntry": "01/01/2020 11:00:00"
-              }
-            }
-          ],
-          "status": "pending",
-          "dateEntry": "11:01:00",
-          "dateProcessed": "01/01/2020 15:00:00"
-        },
-        {
-          "_id": "5",
-          "userId": "userId",
-          "client": "client",
-          "products": [
-            {
-              "qty": 2,
-              "product": {
-                "_id": 12,
-                "name": "Agua",
-                "price": "5.00",
-                "image": "https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
-                "type": "breakfast",
-                "dateEntry": "01/01/2020 15:00:00"
-              }
-            },
-            {
-                "qty": 2,
-                "product": {
-                    "_id":4,
-                   "name":"Hamburguesa simple",
-                   "price":"10.00",
-                   "image":"https://image.freepik.com/foto-gratis/vista-lateral-hamburguesa-carne-res-queso-derretido-verduras-sobre-tabla-madera_140725-11865.jpg",
-                   "type": "lunch",
-                   "dateEntry": null
-                },
-            },
-            {
-                "qty": 2,
-                "product": {
-                    "_id":5,
-                   "name":"Papas fritas",
-                   "price":"5.00",
-                   "image":"https://image.freepik.com/foto-gratis/papas-fritas_144627-12398.jpg",
-                   "type": "lunch",
-                   "dateEntry": null
-                }
-            }
-          ],
-          "status": "delivering",
-          "dateEntry": "01/01/2020 15:00:00",
-          "dateProcessed": "01/01/2020 15:00:00"
-        }
-      ] */
-    
-    
-    const arrayPending  = arrayOrders.filter((el) => {return el.status == 'pending'})
+    //console.log('uniqueOrder', uniqueOrder);
 
-    console.log('data', arrayPending);
+    let body = {};
 
-    return (
-        <div>
-            <Nav className="nav-bar"/>
-            <div className='card-container'>
-                {/* <span>{calculateDate(dateEntry, dateProcessed)}</span> */}
-                {   
-                    arrayPending.map( order => {
-                        //console.log('order', order);
-                        return <Card 
-                            key = {order._id}
-                            status = {order.status}
-                            props = {{
-                                "products": order.products
-                            }}
-                            />
-                    })
-                }
-                
-            </div>
-        </div>
-        
-    )
-}
+    uniqueOrder.map((el) => {
+      return (body = {
+        userId: el.userId,
+        client: el.client,
+        products: el.products,
+        status: "delivering",
+      });
+    });
+
+    console.log("Se supone que se debe eliminar...");
+    const updateData = arrayPending.filter((el) => {
+      return el._id !== idOrden;
+    });
+    setArrayOrders(updateData);
+    //console.log('arrayPending', arrayOrders);
+    return updateOrders(body);
+  };
+
+  return (
+    <div>
+      <Nav className="nav-bar" />
+      <div className="card-container">
+        {arrayPending.map((order) => {
+          //console.log('order', order);
+          //console.log('tiempo',calculateDate(new Date(order.dateEntry), new Date(order.dateProcessed)));
+          return (
+            <Card
+              key={order._id}
+              status={order.status}
+              calculateDate=""
+              props={{
+                _id: order._id,
+                products: order.products,
+              }}
+              modifyOrder={modifyOrder}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 export default ChefPending;

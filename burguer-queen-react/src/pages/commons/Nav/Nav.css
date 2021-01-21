@@ -11,25 +11,20 @@ nav > img {
     padding: 2vh;
 }
 
-.btn-logout {
+.btn-nav {
     color: #ffffff;
-    font-size: 12px;
+    font-size: 15px;
     background-color: #EE3124;
     border: 1px solid #fff;
     outline: none;
     display: flex;
     align-items: center;
-    margin-right: 20px;
-    padding: 10px;
+    margin-right: 15px;
+    padding: 5px;
     cursor: pointer;
     border-radius: 8px;
 }
-.btn-logout > img {
-    width: 20px;
-    margin-right: 5px;
-}
+
 .flex-row {
     display: flex;
-
-   
 }

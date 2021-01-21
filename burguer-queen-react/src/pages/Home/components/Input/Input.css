@@ -1,15 +1,16 @@
 .input-order {
-
-    width: 200px;
-    height: 30px;
+    height: 40px;
     background: #FFFFFF;
     border-radius: 8px;
-    padding-left: 15px;
-    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid rgba(0,0,0,.125);
+    outline: none;
+    color: #1a1a1a;
+    box-sizing: border-box;
 }
 
 .input-order::placeholder {
     color: grey;
-    /* text-align: center; */
 }
 

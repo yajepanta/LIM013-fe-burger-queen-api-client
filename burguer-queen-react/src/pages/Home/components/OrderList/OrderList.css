@@ -1,11 +1,11 @@
 .order-list{
-
     color: #1a1a1a;
     list-style: none;
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
     align-items: center;
+    padding: 0px 10px;
 }
 .span-product {
     width: 110px;
@@ -19,9 +19,10 @@
     height: 40px;
     font-weight: 900;
     color: #fff;
+    
 }
 .order-list > img {
-    height: 20px;
+    width: 18px;
 }
 .icon-delete {
     color: #EE3124;
