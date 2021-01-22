@@ -1,17 +1,18 @@
 .menu-filter{
-
-    background-color: #90BE6D;
+    background-color: #EC1010;
     border: none;
     border-radius: 8px;
-    padding: 8px;
+    padding: 10px;
     outline: none;
-    margin-left: 10px;
+    margin: 0 5px 10px 10px;
     cursor: pointer;
-    color: rgba(26, 26, 26, 0.77);
-    font-size: 16px;
+    color: #fff;
 }
 
 .menu-filter:hover {
-    box-shadow: 0 0 10px grey;
+    box-shadow: 4px 4px 4px rgba(0,0,0,.2);
+}
 
+.menu-filter:active {
+    background-color: rgb(240, 101, 101);
 }

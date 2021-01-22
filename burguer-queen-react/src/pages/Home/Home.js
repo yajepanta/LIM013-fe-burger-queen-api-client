@@ -173,11 +173,11 @@ const Home = () => {
   
                     <section className="order-container"> 
                         <div className="order-info">
-                            <div className="row">
+                            <div className="row space-center">
                                 <Label text="Mi orden" />
                             </div>
                             
-                            <div className="row">
+                            <div className="row space-center">
                                 <Label text="Mesa:" />
                                 <Input attribute={{
                                     id: 'numberTable', 
@@ -188,7 +188,7 @@ const Home = () => {
                                 handleInput={handleInput} />
                             </div>
 
-                            <div className="row">
+                            <div className="row space-center">
                                 <Label text="Cliente:" />
                                 <Input 
                                     attribute={{
@@ -203,7 +203,7 @@ const Home = () => {
                         </div>
 {/* Render order */}
                         <div className="order-products">
-                            <div onClick={ (e) => handleProduct(e.target.id, e.target.className) }>
+                            <div className = "orders-list" onClick={ (e) => handleProduct(e.target.id, e.target.className) }>
                                 {orderArray.map(el => { 
                                     el.total = el.price*el.qty;
                                     totalPrice.push(el.total);

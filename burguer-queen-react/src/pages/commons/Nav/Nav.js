@@ -7,10 +7,10 @@ import './Nav.css';
 const cookies = new Cookies();
 
 const logOut = () => {
-    //cookies.remove('id', {path:'/'});
     cookies.remove('cookieSession', {path:'/'});
     cookies.remove('cookieEmail', {path:'/'})
     window.location.href = './';
+    //cookies.remove('id', {path:'/'});
 }
 
 const Nav = () => {

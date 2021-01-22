@@ -9,6 +9,7 @@ const ChefDelivering = () => {
   const [arrayOrders, setArrayOrders] = useState([]);
 
   useEffect(() => {
+
     getAllOrders()
       .then((data) => {
         return setArrayOrders(data);
@@ -21,7 +22,7 @@ const ChefDelivering = () => {
   });
 
   return (
-    <div>
+    <div> 
       <Nav className='nav-bar' />
       <div className='card-container'>
         {arrayDelivering.map((order) => {
