@@ -7,7 +7,7 @@ export const createOrder = ( token, body) => {
         body: {body}
     };
 
-    fetch('http://localhost:5000/orders', options)
+    /* return  */fetch('http://localhost:5000/orders', options)
     .then((resp) => {
         if (resp.status === 200){
             return resp.json();

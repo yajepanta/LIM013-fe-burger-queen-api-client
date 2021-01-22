@@ -1,6 +1,5 @@
-import '../components/Card.css';
+import "../components/Card.css";
 
-//console.log('tiempo',calculateDate(new Date(order.dateEntry), new Date(order.dateProcessed)));
 const Card = ({status, calculateDate, props, modifyOrder}) => {
     const passTheTime = () => {
         const minutes = parseInt(calculateDate.substr(3))
@@ -15,9 +14,8 @@ const Card = ({status, calculateDate, props, modifyOrder}) => {
         <div className={passTheTime()===true ? 'card red' : 'card' }>
             <div className='row flex-right'>{status === 'delivering' ? `Tiempo total: ${calculateDate}` : ''}</div>
             <div className='card-title flex center'>
-                
                 {/* <span>N°001</span> */}
-                <span className={status==='pending' ? 'chip-estado' : 'chip-estado green'}>{status}</span>
+                <span className={status==='pending' ? 'chip-estado' : 'chip-estado green'}>{status === "pending" ? "Pendiente" : "Entregando"}</span>
             </div>
             <hr></hr>
             <div className='card-body'>
@@ -30,9 +28,7 @@ const Card = ({status, calculateDate, props, modifyOrder}) => {
                 
             </div>
             <button className='btn-send' onClick = {(e) => modifyOrder(props._id)}>Enviar</button>
-            
         </div>
-    )
-}
-
+  );
+};
 export default Card;

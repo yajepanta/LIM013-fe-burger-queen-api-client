@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Spinner } from './pages/commons/Spinner/Spiner';
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    <Spinner />
   </React.StrictMode>,
   document.getElementById('root')
 );

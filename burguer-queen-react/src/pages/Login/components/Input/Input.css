@@ -1,11 +1,11 @@
 .input-login {
-    width: 70%;
-    padding: 0px 30px;
-    height: 60px;
+    width: 40%;
+    padding: 0px 25px;
+    height: 50px;
     background: #FFFFFF;
     border-radius: 50px;
-    font-size: 20px;
-    color: #010101;
+    font-size: 18px;
+    color: grey;
     border: none;
     outline: none;
 }
