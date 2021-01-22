@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import "../ChefPending/ChefPending.css";
-
+import { trackPromise } from "react-promise-tracker";
 import Nav from "../commons/Nav/Nav.js";
 import Card from "../../pages/commons/Card/components/Card.js";
-
 import { getAllOrders, updateOrders } from "../../controller/orders.js";
 
 const ChefPending = () => {
   const [arrayOrders, setArrayOrders] = useState([]);
 
   useEffect(() => {
-    getAllOrders()
-      .then((data) => {
-        return setArrayOrders(data);
-      })
-      .catch((err) => console.log(err));
+    trackPromise(
+      getAllOrders()
+        .then((data) => {
+          return setArrayOrders(data);
+        })
+        .catch((err) => console.log(err))
+    );
   }, []);
 
   const arrayPending = arrayOrders.filter((el) => {
@@ -22,7 +23,6 @@ const ChefPending = () => {
   });
 
   const modifyOrder = (idOrden) => {
-
     const uniqueOrder = arrayPending.filter((el) => {
       return el._id === idOrden;
     });

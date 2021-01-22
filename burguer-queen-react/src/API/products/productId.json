@@ -1,0 +1,26 @@
+[
+    {
+      "_id":1,
+      "name":"Café americano",
+      "price":"5.00",
+      "image":"https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
+      "type": "breakfast",
+      "dateEntry": null
+    },
+    {
+      "_id":2,
+      "name":"Café con leche",
+      "price":"7.00",
+      "image":"https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
+      "type": "breakfast",
+      "dateEntry": null
+    },
+    {
+      "_id":3,
+      "name":"Sandwich de jamón y queso",
+      "price":"10.00",
+      "image":"https://1.bp.blogspot.com/-pNVLQF44npc/WBfTRTaX5aI/AAAAAAAABV0/ZlwkeqVgJfM8D0REy7saXk8lYA_AkCTWgCLcB/s400/cesar-hinojosa-quiroz-caf%25C3%25A9-am%25C3%25A9ricano.jpg",
+      "type": "breakfast",
+      "dateEntry": null
+    }
+]
