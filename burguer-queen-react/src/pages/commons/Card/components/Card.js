@@ -15,6 +15,7 @@ const Card = ({status, calculateDate, props, modifyOrder}) => {
         <div className={passTheTime()===true ? 'card red' : 'card' }>
             <div className='row flex-right'>{status === 'delivering' ? `Tiempo total: ${calculateDate}` : ''}</div>
             <div className='card-title flex center'>
+                
                 {/* <span>N°001</span> */}
                 <span className={status==='pending' ? 'chip-estado' : 'chip-estado green'}>{status}</span>
             </div>
